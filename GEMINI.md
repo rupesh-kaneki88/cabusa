@@ -2,7 +2,7 @@ This project aims to design and develop an accessible, modern, and engaging webs
 
 The website will follow accessibility best practices (WCAG 2.1 AA compliance) to ensure it is usable by screen readers, keyboard navigation, and low-vision users.
 
-YOU SHOULD FOLLOW ALL THE LATEST PRODUCTION LEVEL PRACTICES WHILE MAKING THIS WEBSITE. FOLLOW THE LATEST NEXTJS PRACTICES.
+YOU SHOULD FOLLOW ALL THE LATEST PRODUCTION LEVEL PRACTICES WHILE MAKING THIS WEBSITE. FOLLOW THE LATEST NEXTJS PRACTICES. AND MAKE USE OF THE GSAP FOR THE BETTER UI/UX
 
 Objectives
 Create awareness about blind cricket and its players

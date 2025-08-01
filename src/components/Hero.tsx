@@ -15,7 +15,7 @@ export default function Hero() {
     gsap.from(".text-container .reveal", { 
       opacity: 0, 
       y: 60, 
-      duration: 0.8, 
+      duration: 1, 
       stagger: 0.2 
     });
   }, { scope: container });
@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section
       ref={container}
-      className="w-full py-26 md:py-30 lg:py-36 px-4 lg:px-12 md:px-8"
+      className="w-full mt-26 md:mt-30 lg:mt-36 px-4 lg:px-12 md:px-8"
       style={{ backgroundColor: colors.background, color: colors.text }}
     >
       <div className="container px-4 md:px-6">
