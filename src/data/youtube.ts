@@ -2,21 +2,29 @@ export const youtubeVideos = [
   {
     id: "1",
     title: "Blind Cricket World Cup Final",
-    videoId: "W_R_91A-J9I",
+    description: "Discover the inspiring world of blind cricket in this documentary, showcasing the passion, skill, and resilience of athletes who defy the odds to play the game. From innovative techniques to heart-pounding match moments, The Unseen Game celebrates the power of sport to break barriers and inspire change.",
+    videoId: "_A4uvIC6d2Q",
+    link: "https://www.youtube.com/watch?v=Cm1MIFOvkqA"
   },
   {
     id: "2",
     title: "The Story of Blind Cricket",
-    videoId: "3_g-Y42-6aM",
+    description: "Discover the inspiring world of blind cricket in this documentary, showcasing the passion, skill, and resilience of athletes who defy the odds to play the game. From innovative techniques to heart-pounding match moments, The Unseen Game celebrates the power of sport to break barriers and inspire change.",
+    videoId: "Dj2rRgqcKac",
+    link: "https://www.youtube.com/demo"
   },
   {
     id: "3",
     title: "Blind Cricket in Action",
-    videoId: "Z2tS_UE_u9Q",
+    description: "Discover the inspiring world of blind cricket in this documentary, showcasing the passion, skill, and resilience of athletes who defy the odds to play the game. From innovative techniques to heart-pounding match moments, The Unseen Game celebrates the power of sport to break barriers and inspire change.",
+    videoId: "PTrLh7y2plI",
+    link: "https://www.youtube.com/demo"
   },
   {
     id: "4",
     title: "How Blind Cricket is Played",
-    videoId: "watch?v=2g6y_Vd-43o",
+    description: "Discover the inspiring world of blind cricket in this documentary, showcasing the passion, skill, and resilience of athletes who defy the odds to play the game. From innovative techniques to heart-pounding match moments, The Unseen Game celebrates the power of sport to break barriers and inspire change.",
+    videoId: "Cm1MIFOvkqA",
+    link: "https://www.youtube.com/demo"
   }
 ];

@@ -1,11 +1,25 @@
 
 export const theme = {
   colors: {
-    background: '#0D1B2A',
-    text: '#E0E1DD',
+    // mainBackground: '#0D1B2A',
+    mainBackground: '#292F36',
+    secondaryBackground: '#8F7A6E',
+    text: '#E0DBD8', //Light gray
+    textHeading: '#A41F13', //Fresh red
+    textSubheading: '#FAF5F1', //White fog
+    textBody: '#E0DBD8', //Light gray
+    textAccent: '#8F7A6E', //Soft Brown
+    textComplementry: '#04C0E0', //Light blue
+    textComplementryAccent: '#E02504', //Fresh red
+    // text: '#E0E1DD',
     accent: '#FFD700',
     secondaryText: '#04C0E0',
     complimentryText: '#E02504'
+  },
+  fonts: {
+    inter: 'var(--font-inter)',
+    poppins: 'var(--font-poppins)',
+    playfair: 'var(--font-playfair)',
   },
   fontSizes: {
     xs: '0.75rem',

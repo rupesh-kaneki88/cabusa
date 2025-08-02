@@ -4,81 +4,60 @@ import { useTheme } from "./ThemeProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const ShortSummery = () => {
 
-    const { colors, fontSizes } = useTheme();
+    const { colors } = useTheme();
     const container = useRef(null);
-    const cardRef = useRef(null);
 
     useGSAP(() => {
-        // Initial state - card only shows 40px
-        gsap.set(cardRef.current, {
-            height: "40px",
-            overflow: "hidden"
-        });
-
-        // Scroll trigger animation
-        gsap.to(cardRef.current, {
-            height: "auto",
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: cardRef.current,
-                start: "top 80%",
-                end: "bottom 20%",
-                toggleActions: "play none none reverse"
-            }
-        });
-
-        // Text reveal animation
         gsap.fromTo(".summary-text", 
             { 
                 opacity: 0, 
-                y: 50 
+                y: -250 
             },
             { 
                 opacity: 1, 
                 y: 0, 
-                duration: 0.6,
-                delay: 0.2,
+                duration: 1,
                 scrollTrigger: {
-                    trigger: cardRef.current,
+                    trigger: container.current,
                     start: "top 80%",
                     end: "bottom 20%",
                     toggleActions: "play none none reverse"
                 }
             }
         );
-    }, []);
+    }, { scope: container });
 
     return (
         <section 
             ref={container}
-            className="w-full z-20 px-4 lg:px-12 md:px-8 mb-10"
-            style={{ backgroundColor: colors.background }}
+            className="absolute top-4 right-0 z-50"
         >
-            <div className="container mx-auto max-w-4xl overflow-hidden">
+            <div 
+                className="summary-card rounded-lg p-2 md:mt-4 max-w-md md:max-w-xl overflow-hidden mr-4"
+                style={{ backgroundColor: colors.secondaryBackground }}
+            >
+                {/* Background image positioned behind text */}
+                <img 
+                    src="/doodle_arrow2-fotor-2.png" 
+                    alt="Decorative Arrow"
+                    className="absolute top-0 right-0 w-[500px] h-[500px] mr-40 object-contain opacity-80 pointer-events-none "
+                    style={{ transform: 'rotate(-145deg)', zIndex: 0 }}
+                />
+
+                {/* Text content */}
                 <div 
-                    className="summary-card mx-auto  rounded-lg p-6 md:p-8 transition-all duration-300 z-20"
-                    style={{ 
-                        backgroundColor: '#1B2A3A',
-                        boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2)`,
-                        border: `1px solid ${colors.text}30`,
-                        minHeight: '40px'
-                    }}
+                    className="summary-text font-nata text-thin text-lg md:text-3xl w-[300px] md:w-[490px] text-right leading-relaxed relative z-10"
+                    style={{ color: colors.accent }}
                 >
-                    <div className="summary-text text-lg text-center leading-relaxed" style={{ color: colors.text }}>
-                        <p ref={cardRef}>
-                            {
-                                "Cricket for the blind is an adapted version of the sport designed to be fully accessible to visually impaired players. Using an audible ball filled with bearings and specific rules to support safety and fairness, the game emphasizes teamwork, skill, and inclusion. It offers visually impaired athletes an opportunity to compete at national and international levels, proving that passion for sport knows no boundaries."
-                            }
-                        </p>
-                    </div>
+                <p>
+                    {"In blind cricket, vision is not seen through the eyes, but through courage, teamwork, and the unyielding spirit to play."}
+                </p>
                 </div>
             </div>
         </section>

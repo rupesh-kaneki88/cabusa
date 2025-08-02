@@ -6,15 +6,11 @@ import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   const { colors } = useTheme();
   const headerRef = useRef(null);
-  const navRef = useRef(null);
 
   const navLinks = [
     { name: "Home", href: "#" },
@@ -24,50 +20,14 @@ export default function Header() {
     { name: "Contact", href: "#" },
   ];
 
-  useGSAP(() => {
-    gsap.to(headerRef.current, {
-      height: 72, // Shrink to h-12 (48px)
-      paddingLeft: 64, // px-4
-      paddingRight: 64, // px-4
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "200px top", // Animation ends after scrolling 200px
-        scrub: true,
-      },
-    });
-
-    gsap.to(navRef.current, {
-      fontSize: "1rem", 
-      scale: 0.9, // Slightly shrink the nav links
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "200px top",
-        scrub: true,
-      },
-    });
-
-    gsap.to(".logo-text", {
-      scale: 0.9, // Slightly shrink the logo text
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "200px top",
-        scrub: true,
-      },
-    });
-
-  }, { scope: headerRef });
-
   return (
     <header
       ref={headerRef}
-      className="fixed w-full z-10 top-0 flex items-center justify-between h-30 px-4 border-b shrink-0 px-4 md:px-8 lg:px-12"
-      style={{ backgroundColor: colors.background, color: colors.text }}
+      className="fixed w-full z-10 top-0 flex items-center justify-between h-20 px-4 md:px-8 lg:px-12"
+      style={{ backgroundColor: 'transparent', color: colors.text }}
     >
       <Logo />
-      <nav ref={navRef} className="hidden md:flex items-center space-x-6">
+      <nav className="hidden md:flex items-center space-x-6">
         {navLinks.map((link) => (
           <Link 
             key={link.name}

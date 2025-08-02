@@ -83,6 +83,6 @@ export const getFeaturedStories = (): Story[] => {
   return stories.filter(story => story.featured)
 }
 
-export const getTopStories = (limit: number = 4): Story[] => {
+export const getTopStories = (limit: number = 3): Story[] => {
   return stories.slice(0, limit)
 } 

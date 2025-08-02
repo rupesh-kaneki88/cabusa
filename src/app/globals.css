@@ -1,15 +1,60 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,opsz,wght@0,14..32,400..900;1,14..32,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nanum+Pen+Script&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nata+Sans:wght@100..900&display=swap');
 
 :root {
-  --background-dark: #0D1B2A;
-  --text-light: #E0E1DD;
-  --accent-yellow: #FFD700;
+  /* Font family variables */
+  --font-inter: 'Inter', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-nanum: 'Nanum Pen Script', cursive;
+  --font-nata: 'Nata sans', sans-serif;
 }
 
-body {
-  background-color: var(--background-dark);
-  color: var(--text-light);
-  font-family: 'Poppins', sans-serif;
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: var(--font-inter);
+  background-color: #0D1B2A;
+  color: #E0E1DD;
+}
+
+/* Font utility classes */
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-poppins {
+  font-family: var(--font-poppins);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-roboto {
+  font-family: var(--font-roboto);
+}
+
+.font-nanum {
+  font-family: var(--font-nanum);
+}
+
+.font-nata {
+  font-family: var(--font-nata);
+}
+
+.panel {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 2rem;
 }
