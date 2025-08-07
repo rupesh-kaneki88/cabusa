@@ -36,15 +36,19 @@ export default function Header() {
             className="relative inline-block hover:text-red-600 transition-colors text-lg"
             onMouseEnter={(e) => {
               gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2, color: colors.secondaryText });
-              gsap.to(e.currentTarget.querySelector('.underline-effect'), { scaleX: 1, duration: 0.3, ease: "power2.out" });
+              const underline = e.currentTarget.querySelector('.underline-effect');
+              gsap.set(underline, { transformOrigin: 'left center' });
+              gsap.to(underline, { scaleX: 1, duration: 0.3, ease: "power2.out" });
             }}
             onMouseLeave={(e) => {
               gsap.to(e.currentTarget, { scale: 1, duration: 0.2,color: colors.text });
-              gsap.to(e.currentTarget.querySelector('.underline-effect'), { scaleX: 0, duration: 0.3, ease: "power2.out" });
+              const underline = e.currentTarget.querySelector('.underline-effect');
+              gsap.set(underline, { transformOrigin: 'right center' });
+              gsap.to(underline, { scaleX: 0, duration: 0.3, ease: "power2.out" });
             }}
           >
             {link.name}
-            <span className="underline-effect absolute bottom-0 left-0 w-full h-[2px] bg-current transform scale-x-0 origin-center"></span>
+            <span className="underline-effect absolute bottom-0 left-0 w-full h-[2px] bg-current transform scale-x-0"></span>
           </Link>
         ))}
       </nav>

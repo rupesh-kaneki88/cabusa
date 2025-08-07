@@ -10,6 +10,9 @@ import ShortSummery from "@/components/ShortSummery";
 import Stories from "@/components/Stories";
 import Sponsers from "@/components/Sponsers";
 import Youtube from '@/components/Youtube';
+import RecentArticles from '@/components/RecentArticles';
+import Milestone from '@/components/Milestone';
+import SocialMedia from '@/components/SocialMedia';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,6 +45,17 @@ export default function Home() {
           <ShortSummery />
           <Stories />
           <Youtube />
+          <RecentArticles />
+          <div className="flex flex-col md:flex-row">
+            <div className="w-full md:w-2/3">
+              <Milestone />
+            </div>
+            <div className="w-full md:w-1/3">
+              <div className="md:sticky md:top-0">
+                <SocialMedia />
+              </div>
+            </div>
+          </div>
           <Sponsers />
         </div>
       </div>
@@ -49,4 +63,3 @@ export default function Home() {
     </>
   );
 }
-

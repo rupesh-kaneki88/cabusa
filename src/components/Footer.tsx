@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer
       className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t"
-      style={{ backgroundColor: colors.background, color: colors.text }}
+      style={{ backgroundColor: colors.mainBackground, color: colors.text }}
     >
       <p className="text-xs" style={{ opacity: 0.8 }}>&copy; 2024 Blind Cricket Association. All rights reserved.</p>
       <nav className="sm:ml-auto flex gap-4 sm:gap-6">

@@ -36,8 +36,8 @@ const Stories = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 p-56 md:pt-68">
-      <h2 className="text-3xl md:text-5xl font-bold text-center mb-8">Top Stories</h2>
+    <div className="container mx-auto px-4 md:px-14 p-56 md:pt-54">
+      <h2 className="text-3xl md:text-6xl font-bold text-center mb-8">Top Stories</h2>
       <div className="space-y-16">
         {getTopStories().map((story, index) => (
           <div

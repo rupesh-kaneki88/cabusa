@@ -8,6 +8,25 @@ import { useTheme } from './ThemeProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const Description = ({ text, maxLength }: { text: string, maxLength: number }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  if (text.length <= maxLength) {
+    return <p className="animate-in text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl mb-8">{text}</p>;
+  }
+
+  return (
+    <div>
+      <p className="animate-in text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl mb-8">
+        {isExpanded ? text : `${text.substring(0, maxLength)}...`}
+      </p>
+      {/* <button onClick={() => setIsExpanded(!isExpanded)} className="text-gray-400 font-semibold hover:underline mb-4">
+        {isExpanded ? 'Read Less' : 'Read More'}
+      </button> */}
+    </div>
+  );
+};
+
 const YoutubeShowcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -58,41 +77,6 @@ const YoutubeShowcase = () => {
         );
       });
 
-      // Main horizontal scroll animation
-      const scrollTween = gsap.to(track, {
-        xPercent: -100 * (totalSlides - 1) / totalSlides,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top+=1', 
-          pin: true,
-          scrub: 1,
-          end: () => `+=${track.offsetWidth - window.innerWidth}`,
-          onUpdate: (self) => {
-            const minProgressToSnap = 0.05;
-            const progress = self.progress < minProgressToSnap ? 0 : self.progress;
-            const slideIndex = Math.round(self.progress * (totalSlides - 1));
-            
-            if (slideIndex !== currentIndex.current) {
-              updateActiveSlide(slideIndex);
-            }
-            
-            // Update progress bar
-            if (progressRef.current) {
-              gsap.set(progressRef.current, {
-                scaleX: self.progress
-              });
-            }
-          },
-          snap: (progress) => {
-            // Prevent early snap unless user has scrolled a bit
-            return progress < 0.05
-              ? 0 // snap back to first slide
-              : Math.round(progress * (totalSlides - 1)) / (totalSlides - 1);
-          },
-        }
-      });
-
       const updateActiveSlide = (index: number) => {
         currentIndex.current = index;
         setActiveIndex(index);
@@ -136,6 +120,41 @@ const YoutubeShowcase = () => {
         });
       };
 
+      // Main horizontal scroll animation
+      const scrollTween = gsap.to(track, {
+        xPercent: -100 * (totalSlides - 1) / totalSlides,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top+=1', 
+          pin: true,
+          scrub: 1,
+          end: () => `+=${track.offsetWidth - window.innerWidth}`,
+          onUpdate: (self) => {
+            const minProgressToSnap = 0.05;
+            const progress = self.progress < minProgressToSnap ? 0 : self.progress;
+            const slideIndex = Math.round(self.progress * (totalSlides - 1));
+            
+            if (slideIndex !== currentIndex.current) {
+              updateActiveSlide(slideIndex);
+            }
+            
+            // Update progress bar
+            if (progressRef.current) {
+              gsap.set(progressRef.current, {
+                scaleX: self.progress
+              });
+            }
+          },
+          snap: (progress) => {
+            // Prevent early snap unless user has scrolled a bit
+            return progress < 0.05
+              ? 0 // snap back to first slide
+              : Math.round(progress * (totalSlides - 1)) / (totalSlides - 1);
+          },
+        }
+      });
+
       // Initialize first dot as active
       setTimeout(() => {
         const firstDot = document.querySelector('.nav-dot');
@@ -175,7 +194,7 @@ const YoutubeShowcase = () => {
   return (
     <section 
       ref={containerRef} 
-      className="w-screen h-screen overflow-hidden relative"
+      className="w-screen h-screen overflow-hidden relative "
       style={{ backgroundColor: colors.textBody }}
     >
       {/* Subtle background texture */}
@@ -238,9 +257,7 @@ const YoutubeShowcase = () => {
               {/* Animated underline */}
               <div className="animate-in h-px bg-white mt-6 mb-8 transform scale-x-0 transition-transform duration-500 origin-left hover:scale-x-100"></div>
               
-              <p className="animate-in text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl mb-8">
-                {video.description}
-              </p>
+              <Description text={video.description} maxLength={150} />
               
               {/* Watch button */}
               <button

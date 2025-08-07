@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import Link from "next/link";
@@ -14,6 +12,7 @@ export default function Hero() {
   const titleRef = useRef(null);
   const contentRef = useRef(null);
   const imageRef = useRef(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -70,16 +69,42 @@ export default function Hero() {
       y: 0,
       duration: 0.8,
       ease: 'power3.out',
-    }, "-=0.3");
+    }, "-=0.4");
   
     tl.to(imageRef.current, {
       autoAlpha: 1,
       y: 0,
       duration: 0.8,
       ease: "power3.out",
-    }, "-=0.5");
+    }, "-=0.4");
   
   }, { scope: container });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (buttonRef.current) {
+      const { clientX, clientY } = e;
+      const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
+      const x = clientX - (left + width / 2);
+      const y = clientY - (top + height / 2);
+      gsap.to(buttonRef.current, {
+        x: x * 0.4,
+        y: y * 0.4,
+        duration: 0.7,
+        ease: "power3.out"
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (buttonRef.current) {
+      gsap.to(buttonRef.current, {
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "elastic.out(1,0.3)"
+      });
+    }
+  };
   
   return (
     <section
@@ -124,11 +149,12 @@ export default function Hero() {
                     <span className='learn-more-btn'>Learn More</span>
                   </Link>
                   <Link
+                    ref={buttonRef}
                     href="#"
                     className="inline-flex h-10 items-center justify-center rounded-md border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-text-light/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                     style={{ borderColor: colors.text, color: colors.text }}
-                    onMouseEnter={() => gsap.to(".watch-highlights-btn", { scale: 1.05, duration: 0.2 })}
-                    onMouseLeave={() => gsap.to(".watch-highlights-btn", { scale: 1, duration: 0.2 })}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
                   >
                     <span className='watch-highlights-btn'>Watch Highlights</span>
                   </Link>
@@ -138,7 +164,7 @@ export default function Hero() {
           </div>
           <div className="flex items-center justify-center">
             <div className="hidden md:block cricket-image-container" ref={imageRef} style={{ opacity: 0 }}>
-              <img src='/GEMINI_cricket-Photoroom.png' alt='cricket' width={900} height={900} />
+              <img src='/cricket-batsman.png' alt='cricket' width={900} height={900} />
             </div>
           </div>
         </div>
@@ -146,4 +172,5 @@ export default function Hero() {
     </section>
   );
 }
+''
 

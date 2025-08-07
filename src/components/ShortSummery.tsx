@@ -4,7 +4,7 @@ import { useTheme } from "./ThemeProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useRef, forwardRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +47,7 @@ const ShortSummery = () => {
                     src="/doodle_arrow2-fotor-2.png" 
                     alt="Decorative Arrow"
                     className="absolute top-0 right-0 w-[500px] h-[500px] mr-40 object-contain opacity-80 pointer-events-none "
-                    style={{ transform: 'rotate(-145deg)', zIndex: 0 }}
+                    style={{ transform: 'rotate(-145deg)', zIndex: 0, position: 'absolute' }}
                 />
 
                 {/* Text content */}

@@ -1,12 +1,20 @@
 
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useState, useCallback } from 'react';
 import { theme } from '../theme';
 
-type Theme = typeof theme;
+type HeaderColors = {
+  backgroundColor: string;
+  textColor: string;
+};
 
-const ThemeContext = createContext<Theme | undefined>(undefined);
+type ThemeContextType = typeof theme & {
+  headerColors: HeaderColors;
+  setHeaderColors: (colors: HeaderColors) => void;
+};
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
@@ -17,5 +25,20 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+  const [headerColors, setHeaderColorsState] = useState<HeaderColors>({
+    backgroundColor: theme.colors.mainBackground,
+    textColor: theme.colors.text,
+  });
+
+  const setHeaderColors = useCallback((colors: HeaderColors) => {
+    setHeaderColorsState(colors);
+  }, []);
+
+  const contextValue = {
+    ...theme,
+    headerColors,
+    setHeaderColors,
+  };
+
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 };
