@@ -58,3 +58,20 @@ html, body {
   flex-shrink: 0;
   padding: 2rem;
 }
+
+.gradient-text {
+  background: linear-gradient(to right, #E0DBD8, #A41F13, #E0DBD8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradient-animation 4s linear infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}

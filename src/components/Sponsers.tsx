@@ -3,8 +3,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { sponsors } from '@/data/sponsors'
-
+import { useTheme } from './ThemeProvider';
 const Sponsers = () => {
+  const { colors } = useTheme();
   const [isPaused, setIsPaused] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<gsap.core.Tween | null>(null)
@@ -59,8 +60,9 @@ const Sponsers = () => {
 
   return (
     <section 
-      className="w-full bg-black py-12"
+      className="w-full py-12"
       aria-label="Our Sponsors"
+      style={{ backgroundColor:colors.mainBackground }}
     >
       <div className="container mx-auto px-4">
         <h2 className="text-white text-3xl font-bold text-center mb-8">
@@ -135,8 +137,8 @@ const Sponsers = () => {
           </div>
           
           {/* Gradient overlays for smooth fade effect */}
-          <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-black to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-black to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-[#292F36] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-[#292F36] to-transparent pointer-events-none" />
         </div>
         
         {/* Accessibility announcement */}

@@ -33,9 +33,9 @@ export default function Header() {
             key={link.name}
             href={link.href} 
             style={{ color: colors.text }} 
-            className="relative inline-block hover:text-red-600 transition-colors text-lg"
+            className="relative inline-block text-lg"
             onMouseEnter={(e) => {
-              gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2, color: colors.secondaryText });
+              gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2, color: colors.textAccent });
               const underline = e.currentTarget.querySelector('.underline-effect');
               gsap.set(underline, { transformOrigin: 'left center' });
               gsap.to(underline, { scaleX: 1, duration: 0.3, ease: "power2.out" });

@@ -36,30 +36,35 @@ const Stories = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 md:px-14 p-56 md:pt-54">
-      <h2 className="text-3xl md:text-6xl font-bold text-center mb-8">Top Stories</h2>
+    <div className="container mx-auto px-4 md:px-2 lg:px-20 p-56 md:pt-54">
+      <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.mainBackground }}>Top Stories</h2>
       <div className="space-y-16">
         {getTopStories().map((story, index) => (
-          <div
+          <figure
             key={story.id}
             ref={(el: HTMLDivElement | null) => {
               storyRefs.current[index] = el;
             }}
-            className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-            <div className="w-1/2">
-              <Image
-                src={story.image}
-                alt={story.title}
-                width={500}
-                height={300}
-                className="rounded-lg shadow-lg"
-              />
+            className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
+            <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg" 
+              style={{ border: '2px dashed #ccc', padding: '5px', height: '350px' }}>
+              <div className="overflow-hidden rounded-lg h-full" tabIndex={0}
+                onMouseEnter={(e) => gsap.to(e.currentTarget.querySelector('img'), { scale: 1.1, duration: 0.3, ease: 'power2.out' })}
+                onMouseLeave={(e) => gsap.to(e.currentTarget.querySelector('img'), { scale: 1, duration: 0.3, ease: 'power2.inOut' })}>
+                <Image
+                  src={story.image}
+                  alt={story.title}
+                  width={400}
+                  height={300}
+                  className="rounded-lg shadow-lg object-cover w-full h-full"
+                />
+              </div>
             </div>
-            <div className="w-1/2 story-text">
-              <h3 className="text-2xl font-bold mb-4" style={{ color: colors.accent }}>{story.title}</h3>
-              <p>{story.excerpt}</p>
-            </div>
-          </div>
+            <figcaption className="w-full md:w-1/2 story-text rounded-xl">
+              <h3 className="text-2xl font-bold mb-4" style={{ color: colors.mainBackground }}>{story.title}</h3>
+              <p >{story.excerpt}</p>
+            </figcaption>
+          </figure>
         ))}
       </div>
     </div>

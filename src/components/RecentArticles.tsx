@@ -44,7 +44,7 @@ export default function RecentArticles() {
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
-    gsap.to(e.currentTarget, { scale: 1.1, duration: 0.1, color: colors.secondaryText });
+    gsap.to(e.currentTarget, { scale: 1.1, duration: 0.1, color: colors.textBody });
     const underline = e.currentTarget.querySelector('.underline-effect');
     gsap.set(underline, { transformOrigin: 'left center' });
     gsap.to(underline, { scaleX: 1, duration: 0.3, ease: "power2.out" });
@@ -63,9 +63,9 @@ export default function RecentArticles() {
         <h2 className="text-3xl md:text-6xl font-bold text-center mb-8">Recent Articles</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Article Window (Left Side) */}
-          <div className="lg:w-2/3">
+          <div className="lg:w-2/3 relative">
             <Link href={mainArticle.link}>
-              <div className="relative w-full h-[330px] md:h-[540px] rounded-lg overflow-hidden shadow-lg group">
+              <div className="relative w-full h-[330px] md:h-[540px] shadow-lg group overflow-hidden">
                 <img src={mainArticle.image} alt={mainArticle.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div className="absolute bottom-0 left-0 w-full h-2/5 bg-gradient-to-t from-black to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-6 text-white">
@@ -75,6 +75,9 @@ export default function RecentArticles() {
                 </div>
               </div>
             </Link>
+            {/* Corner accents */}
+            <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2  opacity-80 transition-opacity duration-300 group-hover:opacity-40" style={{borderColor:colors.textBody}}></div>
+            <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 opacity-80 transition-opacity duration-300 group-hover:opacity-40" style={{borderColor:colors.textBody}}></div>
           </div>
 
           {/* Article List (Right Side) */}
@@ -82,7 +85,8 @@ export default function RecentArticles() {
             {otherArticles.map((article) => (
               <div key={article.id} 
                 className="flex items-center gap-4 cursor-pointer group"
-                onClick={() => handleArticleSelect(article)} >
+                onClick={() => handleArticleSelect(article)} 
+                style={{ border: '2px dashed #ccc', padding: '5px' }}>
                 <div className="w-1/3 h-24 rounded-lg overflow-hidden">
                   <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                 </div>

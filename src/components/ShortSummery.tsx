@@ -36,17 +36,17 @@ const ShortSummery = () => {
     return (
         <section 
             ref={container}
-            className="absolute top-4 right-0 z-50"
+            className="absolute md:top-0 lg:top-4 right-0 z-50"
         >
             <div 
-                className="summary-card rounded-lg p-2 md:mt-4 max-w-md md:max-w-xl overflow-hidden mr-4"
+                className="summary-card rounded-lg p-2 lg:mt-4 max-w-md md:max-w-xl overflow-hidden mr-4"
                 style={{ backgroundColor: colors.secondaryBackground }}
             >
                 {/* Background image positioned behind text */}
                 <img 
                     src="/doodle_arrow2-fotor-2.png" 
                     alt="Decorative Arrow"
-                    className="absolute top-0 right-0 w-[500px] h-[500px] mr-40 object-contain opacity-80 pointer-events-none "
+                    className="absolute top-0 right-0 md:w-[300px] md:h-[300px] lg:w-[500px] lg:h-[500px] -mt-8 md:-mt-8 -mr-14 md:mr-20 lg:mr-20 object-contain opacity-80 pointer-events-none "
                     style={{ transform: 'rotate(-145deg)', zIndex: 0, position: 'absolute' }}
                 />
 

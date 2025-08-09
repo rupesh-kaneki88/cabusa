@@ -12,12 +12,12 @@ const Description = ({ text, maxLength }: { text: string, maxLength: number }) =
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (text.length <= maxLength) {
-    return <p className="animate-in text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl mb-8">{text}</p>;
+    return <p className="animate-in text-sm md:text-xl text-left md:text-center lg:text-left text-gray-400 leading-relaxed lg:max-w-2xl mb-8">{text}</p>;
   }
 
   return (
     <div>
-      <p className="animate-in text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl mb-8">
+      <p className="animate-in text-sm md:text-xl text-left md:text-center lg:text-left text-gray-400 leading-relaxed lg:max-w-2xl mb-8">
         {isExpanded ? text : `${text.substring(0, maxLength)}...`}
       </p>
       {/* <button onClick={() => setIsExpanded(!isExpanded)} className="text-gray-400 font-semibold hover:underline mb-4">
@@ -212,21 +212,22 @@ const YoutubeShowcase = () => {
           className="h-full bg-white origin-left transform scale-x-0"
         />
       </div>
-
+        <h2 className="text-3xl md:text-6xl font-bold text-center mt-6 md:mt-8 lg:mt-14 md:mb-4" style={{color: colors.textAccent}}>Video Gallery</h2>
       {/* Main Content Track */}
       <div
         ref={trackRef}
         className="flex h-full will-change-transform"
         style={{ width: `${youtubeVideos.length * 100}vw` }}
       >
+        
         {youtubeVideos.map((video, index) => (
           <div
             key={video.id}
             ref={el => { videosRef.current[index] = el; }}
-            className="w-screen h-screen flex flex-col lg:flex-row items-center justify-center px-6 md:px-12 lg:px-20 shrink-0 will-change-transform"
+            className="w-screen h-screen flex flex-col lg:flex-row items-center justify-center -mt-10 lg:-mt-18 px-6 md:px-12 lg:px-20 shrink-0 will-change-transform"
           >
             {/* Video Container */}
-            <div className="w-full lg:w-1/2 max-w-2xl relative group animate-in">
+            <div className="w-full md:w-2/3 lg:w-1/2 max-w-2xl relative group animate-in">
               <div className="relative aspect-video overflow-hidden rounded-lg shadow-2xl bg-gray-900 border border-gray-800 transition-all duration-500 hover:border-gray-700 hover:shadow-3xl hover:scale-[1.02]">
                 <iframe
                   className="w-full h-full"
@@ -238,15 +239,15 @@ const YoutubeShowcase = () => {
               </div>
               
               {/* Corner accents */}
-              <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-white opacity-20 transition-opacity duration-300 group-hover:opacity-40"></div>
-              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-white opacity-20 transition-opacity duration-300 group-hover:opacity-40"></div>
+              <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-gray-400 opacity-40 transition-opacity duration-300 group-hover:opacity-40"></div>
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-gray-400 opacity-40 transition-opacity duration-300 group-hover:opacity-40"></div>
             </div>
 
             {/* Content Container */}
-            <div className="w-full lg:w-1/2 mt-8 lg:mt-0 lg:pl-16 text-center lg:text-left">
+            <div className="w-full lg:w-1/2 mt-8 md:mt-4 lg:mt-0 lg:pl-16 text-center md:text-center lg:text-left" style={{ border: '2px dashed #ccc', padding: '5px' }}>
               <h3
-                className="animate-in text-3xl md:text-4xl lg:text-5xl font-bold cursor-pointer transition-all duration-300 hover:text-gray-300 leading-tight"
-                style={{ color: colors.textHeading }}
+                className="animate-in text-2xl md:text-4xl lg:text-5xl font-bold cursor-pointer transition-all duration-300 hover:text-gray-300 leading-tight"
+                style={{ color: colors.textAccent }}
                 onClick={() =>
                   window.open(`https://www.youtube.com/watch?v=${video.videoId}`, '_blank')
                 }
@@ -255,7 +256,7 @@ const YoutubeShowcase = () => {
               </h3>
               
               {/* Animated underline */}
-              <div className="animate-in h-px bg-white mt-6 mb-8 transform scale-x-0 transition-transform duration-500 origin-left hover:scale-x-100"></div>
+              <div className="animate-in h-px bg-white mt-2 md:mt-4 lg:mt-6 mb-2 lg:mb-8 transform scale-x-0 transition-transform duration-500 origin-left hover:scale-x-100"></div>
               
               <Description text={video.description} maxLength={150} />
               
@@ -264,7 +265,8 @@ const YoutubeShowcase = () => {
                 onClick={() =>
                   window.open(`https://www.youtube.com/watch?v=${video.videoId}`, '_blank')
                 }
-                className="animate-in px-8 py-3 bg-white text-black font-medium rounded transition-all duration-300 hover:bg-gray-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                className="animate-in px-8 py-3 text-black font-medium rounded transition-all duration-300 hover:bg-gray-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 hover:cursor-pointer"
+                style={{ backgroundColor: colors.textAccent }}
               >
                 <span className="flex items-center justify-center space-x-2">
                   <span>Watch Video</span>
@@ -311,7 +313,7 @@ const YoutubeShowcase = () => {
       </button> */}
 
       {/* Slide counter */}
-      <div className="absolute top-8 right-8 text-gray-400 font-mono text-sm z-10">
+      <div className="absolute top-4 md:top-8 right-4 md:right-8 text-gray-400 font-mono text-sm z-10">
         {String(activeIndex + 1).padStart(2, '0')} / {String(youtubeVideos.length).padStart(2, '0')}
       </div>
     </section>

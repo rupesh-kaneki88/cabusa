@@ -76,6 +76,12 @@ export default function Hero() {
       y: 0,
       duration: 0.8,
       ease: "power3.out",
+      onComplete: () => {
+        // Add the gradient class to the title after all animations are complete
+        if (titleRef.current) {
+          (titleRef.current as HTMLElement).classList.add("gradient-text");
+        }
+      }
     }, "-=0.4");
   
   }, { scope: container });
@@ -119,7 +125,7 @@ export default function Hero() {
               <div className="relative" style={{ minHeight: "120px" }}>
                 <h1
                   ref={titleRef}
-                  className="text-4xl font-bold tracking-tighter md:text-7xl"
+                  className="text-4xl font-bold tracking-tighter md:text-7xl gradient-text"
                   style={{
                     color: colors.textHeading,
                     opacity: 0,
@@ -163,7 +169,7 @@ export default function Hero() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div className="hidden md:block cricket-image-container" ref={imageRef} style={{ opacity: 0 }}>
+            <div className="hidden lg:block cricket-image-container" ref={imageRef} style={{ opacity: 0 }}>
               <img src='/cricket-batsman.png' alt='cricket' width={900} height={900} />
             </div>
           </div>

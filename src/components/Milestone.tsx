@@ -3,10 +3,12 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { milestones } from '@/data/milestones';
+import { useTheme } from './ThemeProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Milestone = () => {
+  const { colors } = useTheme();
   const milestoneSectionRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const milestoneRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -70,7 +72,7 @@ const Milestone = () => {
   return (
     <div className="py-20 px-4 md:px-14" ref={milestoneSectionRef}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-24">Our Milestones</h2>
+        <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.textBody }}>Our Milestones</h2>
         <div className="relative">
           <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2">
             <div
@@ -88,8 +90,8 @@ const Milestone = () => {
                 className="mb-12"
               >
                 <div className={`flex w-full items-center justify-between ${index % 2 !== 0 ? 'flex-row-reverse' : ''}`}>
-                  <div className="w-5/12 milestone-card">
-                    <div className="bg-white rounded-lg shadow-xl p-6">
+                  <div className="w-5/12 milestone-card" style={{ border: '2px dashed #ccc', padding: '5px' }}>
+                    <div className="rounded-lg shadow-xl p-6" style={{ backgroundColor: colors.textBody}}>
                       <h3 className="text-xl font-bold mb-2 text-gray-800">{milestone.title}</h3>
                       <p className="text-gray-600">{milestone.description}</p>
                     </div>
