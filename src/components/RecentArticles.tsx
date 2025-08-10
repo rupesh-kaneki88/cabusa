@@ -83,16 +83,18 @@ export default function RecentArticles() {
           {/* Article List (Right Side) */}
           <div className="lg:w-1/3 flex flex-col gap-4 mt-4 md:mt-2">
             {otherArticles.map((article) => (
-              <div key={article.id} 
+              <Link
+                key={article.id}
+                href={article.link}
                 className="flex items-center gap-4 cursor-pointer group"
-                onClick={() => handleArticleSelect(article)} 
-                style={{ border: '2px dashed #ccc', padding: '5px' }}>
+                onClick={() => handleArticleSelect(article)}
+              >
                 <div className="w-1/3 h-24 rounded-lg overflow-hidden">
                   <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <div className="w-2/3 flex flex-col">
                   <span className="text-xs opacity-70">{new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                  <h4 
+                  <h4
                     className="font-semibold line-clamp-2 ml-4 group-hover:text-blue-500 transition-colors duration-300 relative inline-block"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -101,18 +103,17 @@ export default function RecentArticles() {
                     <span className="underline-effect absolute bottom-0 left-0 w-full h-[2px] bg-current transform scale-x-0"></span>
                   </h4>
                 </div>
-              </div>
+              </Link>
             ))}
             <div className="text-right md:mt-8">
-              <Link href="/articles">
-                <div 
-                  className="inline-block text-white px-4 mt-6 rounded-lg relative"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  View All Articles
-                  <span className="underline-effect absolute bottom-0 left-0 w-full h-[2px] bg-current transform scale-x-0"></span>
-                </div>
+              <Link
+                href="/articles"
+                className="inline-block text-white px-4 mt-6 rounded-lg relative"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                View All Articles
+                <span className="underline-effect absolute bottom-0 left-0 w-full h-[2px] bg-current transform scale-x-0"></span>
               </Link>
             </div>
           </div>

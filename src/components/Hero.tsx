@@ -170,7 +170,7 @@ export default function Hero() {
           </div>
           <div className="flex items-center justify-center">
             <div className="hidden lg:block cricket-image-container" ref={imageRef} style={{ opacity: 0 }}>
-              <img src='/cricket-batsman.png' alt='cricket' width={900} height={900} />
+              <img src='/cricket-batsman.png' alt='A blind cricket batsman playing a shot.' width={900} height={900} />
             </div>
           </div>
         </div>

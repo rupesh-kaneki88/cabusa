@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getTopStories } from '@/data/stories';
 import Image from 'next/image';
 import { useTheme } from './ThemeProvider';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +49,7 @@ const Stories = () => {
             className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
             <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg" 
               style={{ border: '2px dashed #ccc', padding: '5px', height: '350px' }}>
-              <div className="overflow-hidden rounded-lg h-full" tabIndex={0}
+              <Link href="#" className="overflow-hidden rounded-lg h-full block"
                 onMouseEnter={(e) => gsap.to(e.currentTarget.querySelector('img'), { scale: 1.1, duration: 0.3, ease: 'power2.out' })}
                 onMouseLeave={(e) => gsap.to(e.currentTarget.querySelector('img'), { scale: 1, duration: 0.3, ease: 'power2.inOut' })}>
                 <Image
@@ -58,7 +59,7 @@ const Stories = () => {
                   height={300}
                   className="rounded-lg shadow-lg object-cover w-full h-full"
                 />
-              </div>
+              </Link>
             </div>
             <figcaption className="w-full md:w-1/2 story-text rounded-xl">
               <h3 className="text-2xl font-bold mb-4" style={{ color: colors.mainBackground }}>{story.title}</h3>

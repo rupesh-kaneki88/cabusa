@@ -94,15 +94,13 @@ const Carousel = () => {
           </div>
           
           {/* View All Button */}
-          <button
+          <Link
+            href="#"
             className="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
-            onClick={() => {
-              // TODO: Navigate to stories page
-              console.log('Navigate to all stories page')
-            }}
+            // TODO: Navigate to stories page
           >
             View All Stories
-          </button>
+          </Link>
         </div>
 
         {/* Carousel Container */}
