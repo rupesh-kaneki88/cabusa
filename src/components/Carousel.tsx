@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react'
 import { getTopStories, type Story } from '@/data/stories'
 import { useTheme } from './ThemeProvider'
+import Link from 'next/link'
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -80,7 +81,7 @@ const Carousel = () => {
   }
 
   return (
-    <section className={`w-full bg-gradient-to-b from-${colors.background} to-black py-16`}>
+    <section className={`w-full bg-gradient-to-b from-${colors.mainBackground} to-black py-16`}>
       <div className="container mx-auto px-4 lg:px-12 md:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
