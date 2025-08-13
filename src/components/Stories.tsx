@@ -37,7 +37,7 @@ const Stories = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 md:px-2 lg:px-20 p-56 md:pt-54">
+    <div className="mx-auto px-4 md:px-2 lg:px-20 pt-26 md:pt-58 mb-16 uppercase" style={{ backgroundColor: colors.secondaryBackground }}>
       <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.mainBackground }}>Top Stories</h2>
       <div className="space-y-16">
         {getTopStories().map((story, index) => (
@@ -47,9 +47,9 @@ const Stories = () => {
               storyRefs.current[index] = el;
             }}
             className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
-            <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg" 
-              style={{ border: '2px dashed #ccc', padding: '5px', height: '350px' }}>
-              <Link href="#" className="overflow-hidden rounded-lg h-full block"
+            <div className="w-full md:w-1/2 relative overflow-hidden" 
+              style={{ border: `2px dashed #ccc`, padding: '5px', height: '350px' }}>
+              <Link href="#" className="overflow-hidden h-full block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                 onMouseEnter={(e) => gsap.to(e.currentTarget.querySelector('img'), { scale: 1.1, duration: 0.3, ease: 'power2.out' })}
                 onMouseLeave={(e) => gsap.to(e.currentTarget.querySelector('img'), { scale: 1, duration: 0.3, ease: 'power2.inOut' })}>
                 <Image
@@ -57,7 +57,7 @@ const Stories = () => {
                   alt={story.title}
                   width={400}
                   height={300}
-                  className="rounded-lg shadow-lg object-cover w-full h-full"
+                  className=" shadow-lg object-cover w-full h-full"
                 />
               </Link>
             </div>

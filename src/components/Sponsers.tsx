@@ -60,14 +60,12 @@ const Sponsers = () => {
 
   return (
     <section 
-      className="w-full py-12"
+      className="w-full py-12 uppercase"
       aria-label="Our Sponsors"
       style={{ backgroundColor:colors.mainBackground }}
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.textAccent }}>
-          Our Sponsors
-        </h2>
+        <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.secondaryBackground }}>Parteners</h2>
         
         <div 
           className="relative overflow-hidden"
@@ -137,8 +135,8 @@ const Sponsers = () => {
           </div>
           
           {/* Gradient overlays for smooth fade effect */}
-          <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-[#292F36] to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-[#292F36] to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-[#002d73] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-[#002d73] to-transparent pointer-events-none" />
         </div>
         
         {/* Accessibility announcement */}

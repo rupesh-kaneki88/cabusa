@@ -1,14 +1,15 @@
 
 export const theme = {
   colors: {
-    // mainBackground: '#0D1B2A',
-    mainBackground: '#292F36',
-    secondaryBackground: '#8F7A6E',
+    mainBackground: '#002d73',
+    secondaryBackground: '#ffffff',
+    thirdBackground: '#c60946', //red
     text: '#E0DBD8', //Light gray
     textHeading: '#A41F13', //Fresh red
     textSubheading: '#FAF5F1', //White fog
     textBody: '#E0DBD8', //Light gray
-    textAccent: '#8F7A6E', //Soft Brown
+    textAccent: '#c60946', //red
+    // textAccent: '#8F7A6E', //Soft Brown
     textComplementry: '#04C0E0', //Light blue
     textComplementryAccent: '#E02504', //Fresh red
     // text: '#E0E1DD',

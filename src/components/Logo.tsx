@@ -8,7 +8,7 @@ export default function Logo() {
   const { colors } = useTheme();
 
   return (
-    <Link href="#" className="flex items-center space-x-2" style={{ color: colors.text }}>
+    <Link href="#" className="flex items-center space-x-2" style={{ color: colors.mainBackground }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

@@ -112,10 +112,28 @@ export default function Hero() {
     }
   };
   
+  const handleLearnMoreMouseEnter = () => {
+    gsap.to(".learn-more-line", {
+      scaleX: 1,
+      duration: 0.3,
+      ease: "power2.out",
+      transformOrigin: "left center"
+    });
+  };
+
+  const handleLearnMoreMouseLeave = () => {
+    gsap.to(".learn-more-line", {
+      scaleX: 0,
+      duration: 0.3,
+      ease: "power2.out",
+      transformOrigin: "right center"
+    });
+  };
+  
   return (
     <section
       ref={container}
-      className="w-screen h-screen flex items-center justify-center px-4 lg:px-12 md:px-8"
+      className="w-screen h-screen flex items-center justify-center pt-16 md:pt-0 px-4 lg:px-12 md:px-8 uppercase"
       style={{ backgroundColor: colors.mainBackground, color: colors.text }}
     >
       <div className="container px-4 md:px-6">
@@ -125,14 +143,14 @@ export default function Hero() {
               <div className="relative" style={{ minHeight: "120px" }}>
                 <h1
                   ref={titleRef}
-                  className="text-4xl font-bold tracking-tighter md:text-7xl gradient-text"
+                  className="text-4xl font-bold tracking-tighter md:text-7xl gradient-text uppercase italic"
                   style={{
                     color: colors.textHeading,
                     opacity: 0,
                   }}
                 >
                   Cricket Association Board of 
-                  <span className="font-poppins" style={{ color: colors.text }}> United </span>
+                  <span className="font-montserrat" style={{ color: colors.text }}> United </span>
                   States
                   <span
                     className="underline-sweep mt-2 absolute bottom-0 left-0 h-[2px] w-0"
@@ -141,23 +159,24 @@ export default function Hero() {
                 </h1>
               </div>
               <div ref={contentRef} style={{ opacity: 0 }}>
-                <p className="max-w-[600px] text-lg md:text-xl" style={{ opacity: 0.8 }}>
+                <p className="max-w-[600px] text-lg md:text-xl uppercase italic" style={{ color:colors.secondaryBackground }}>
                   Discover the incredible sport of blind cricket and the amazing athletes who play it.
                 </p>
                 <div className="flex flex-col gap-3 min-[400px]:flex-row mt-14 lg:mt-8">
                   <Link
                     href="#"
-                    className="inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
-                    style={{ backgroundColor: colors.textAccent, color: colors.text }}
-                    onMouseEnter={() => gsap.to(".learn-more-btn", { scale: 1.05, duration: 0.2 })}
-                    onMouseLeave={() => gsap.to(".learn-more-btn", { scale: 1, duration: 0.2 })}
+                    className="relative inline-flex h-10 items-center justify-center px-8 text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
+                    style={{ color: colors.thirdBackground }}
+                    onMouseEnter={handleLearnMoreMouseEnter}
+                    onMouseLeave={handleLearnMoreMouseLeave}
                   >
-                    <span className='learn-more-btn'>Learn More</span>
+                    <span className='relative z-10'>Learn More</span>
+                    <span className="absolute bottom-0 left-0 h-[2px] w-full bg-current learn-more-line origin-left scale-x-0"></span>
                   </Link>
                   <Link
                     ref={buttonRef}
                     href="#"
-                    className="inline-flex h-10 items-center justify-center rounded-md border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-text-light/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex h-10 items-center justify-center border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-text-light/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                     style={{ borderColor: colors.text, color: colors.text }}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}

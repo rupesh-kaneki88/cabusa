@@ -9,7 +9,7 @@ export default function ArticlesPage() {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => (
           <Link href={article.link} key={article.id}>
-            <div className="block border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="block border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500">
               <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
               <div className="p-6">
                 <h2 className="text-2xl font-bold mb-2">{article.title}</h2>

@@ -16,22 +16,87 @@ export default function Header() {
   const line1Ref = useRef<SVGPathElement | null>(null);
   const line2Ref = useRef<SVGPathElement | null>(null);
   const line3Ref = useRef<SVGPathElement | null>(null);
+  const [clickedLink, setClickedLink] = useState<string | null>(null);
+  const [openMobileSubMenu, setOpenMobileSubMenu] = useState<string | null>(null);
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) { // Example threshold
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "About", href: "#" },
-    { name: "Events", href: "#" },
-    { name: "News", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "JOIN", href: "#join-section" },
+    {
+      name: "CRICKET",
+      href: "#cricket-section",
+      subLinks: [
+        { name: "ZONES", href: "#" },
+        { name: "SUBMIT YOUR NEWS", href: "#" },
+        { name: "ABOUT DOMESTIC CRICKET", href: "#" },
+      ],
+    },
+    {
+      name: "TEAM",
+      // href: "#team-section",
+      subLinks: [
+        { name: "PROFILES", href: "#" },
+        { name: "ABOUT TEAM USA", href: "#" },
+        { name: "MATCH CENTER", href: "#" },
+        { name: "SCHEDULE", href: "#" },
+      ],
+    },
+    {
+      name: "GET INVOLVED",
+      // href: "#get-involved-section",
+      subLinks: [
+        { name: "PLAYING", href: "#" },
+        { name: "OFFICIATING", href: "#" },
+        { name: "COACHING", href: "#" },
+        { name: "WOMEN AND GIRLS", href: "#" },
+      ],
+    },
+    {
+      name: "MORE",
+      // href: "#more-section",
+      subLinks: [
+        { name: "PHOTOS", href: "#" },
+        { name: "VIDEOS", href: "#" },
+        { name: "MEDIA RELEASES", href: "#" },
+        { name: "NEWS", href: "#" },
+        { name: "SOCIAL HUB", href: "#" },
+      ],
+    },
+    {
+      name: "ABOUT",
+      // href: "#about-section",
+      subLinks: [
+        { name: "BOARD OF DIRECTORS", href: "#" },
+        { name: "CODE OF CONDUCT", href: "#" },
+        { name: "COMMITTEES", href: "#" },
+        { name: "CONTACT US", href: "#" },
+      ],
+    },
   ];
 
   useEffect(() => {
     if (mobileMenuRef.current) {
-      if (isMobileMenuOpen) {
-        gsap.to(mobileMenuRef.current, { x: 0, duration: 0.3, ease: "power2.out" });
-      } else {
-        gsap.to(mobileMenuRef.current, { x: "100%", duration: 0.3, ease: "power2.out" });
-      }
+      gsap.to(mobileMenuRef.current, { 
+        x: isMobileMenuOpen ? 0 : "100%", 
+        duration: 0.3, 
+        ease: "power2.out" 
+      });
     }
   }, [isMobileMenuOpen]);
 
@@ -49,93 +114,151 @@ export default function Header() {
     }
   }, [isMobileMenuOpen]);
 
-  const renderNavLink = (link: { name: string, href: string }, isMobile: boolean) => (
-    <Link
-      key={link.name}
-      href={link.href}
-      style={{ color: colors.text }}
-      className={`relative inline-block text-lg ${isMobile ? 'py-2' : ''}`}
-      onMouseEnter={(e) => {
-        if (!isMobile) {
-          gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2, color: colors.textAccent });
-          const underline = e.currentTarget.querySelector('.underline-effect');
-          gsap.set(underline, { transformOrigin: 'left center' });
-          gsap.to(underline, { scaleX: 1, duration: 0.3, ease: "power2.out" });
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isMobile) {
-          gsap.to(e.currentTarget, { scale: 1, duration: 0.2, color: colors.text });
-          const underline = e.currentTarget.querySelector('.underline-effect');
-          gsap.set(underline, { transformOrigin: 'right center' });
-          gsap.to(underline, { scaleX: 0, duration: 0.3, ease: "power2.out" });
-        }
-      }}
-      onClick={() => {
-        if (isMobile) {
-          setIsMobileMenuOpen(false);
-        }
-      }}
-    >
-      {link.name}
-      {!isMobile && <span className="underline-effect absolute bottom-0 left-0 w-full h-[2px] bg-current transform scale-x-0"></span>}
-    </Link>
-  );
+  useGSAP(() => {
+    if (headerRef.current) {
+      gsap.to(headerRef.current, {
+        height: clickedLink ? "5rem" : (isScrolled ? "4rem" : "5rem"), // 64px vs 80px
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+
+    Object.keys(dropdownRefs.current).forEach(key => {
+      const dropdown = dropdownRefs.current[key];
+      if (dropdown) {
+        gsap.set(dropdown, { height: 0, opacity: 0, display: 'none' });
+      }
+    });
+
+    if (clickedLink && dropdownRefs.current[clickedLink]) {
+      const dropdown = dropdownRefs.current[clickedLink];
+      gsap.to(dropdown, {
+        display: 'block',
+        height: 'auto',
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    }
+  }, [clickedLink, isScrolled]);
+
+  const handleClick = (linkName: string) => {
+    setClickedLink(clickedLink === linkName ? null : linkName);
+  };
+
+  const toggleMobileSubMenu = (linkName: string) => {
+    setOpenMobileSubMenu(openMobileSubMenu === linkName ? null : linkName);
+  };
 
   return (
     <header
       ref={headerRef}
-      className="fixed w-full z-10 top-0 flex items-center justify-between h-20 px-4 md:px-8 lg:px-12"
-      style={{ backgroundColor: 'transparent', color: colors.text }}
+      className="fixed w-full z-20 top-0 flex items-center justify-between px-4 md:px-8 lg:px-12"
+      style={{ backgroundColor: colors.secondaryBackground, color: colors.thirdBackground, borderBottom: `4px solid ${colors.thirdBackground}` }}
     >
       <Logo />
-      <nav className="hidden md:flex items-center space-x-6">
-        {navLinks.map((link) => renderNavLink(link, false))}
+      <nav className="hidden md:flex items-center space-x-4">
+        {navLinks.map((link) => (
+          <div
+            key={link.name}
+            className="relative"
+            onClick={() => link.subLinks && handleClick(link.name)}
+          >
+            <Link
+              href={link.href || '#'}
+              className="flex items-center px-4 py-2 text-lg"
+              style={{ color: colors.mainBackground }}
+            >
+              {link.name}
+              {link.subLinks && (
+                <svg className={`w-4 h-4 ml-2 transition-transform duration-300 ${clickedLink === link.name ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              )}
+            </Link>
+            {link.subLinks && (
+              <div
+                ref={(el: HTMLDivElement | null) => { dropdownRefs.current[link.name] = el; }}
+                className={`absolute top-full w-max mt-[16px] p-2 shadow-lg hidden ${link.name === 'ABOUT' ? 'right-0 left-auto' : 'left-0'}`}
+                style={{ backgroundColor: colors.thirdBackground, color: colors.secondaryBackground }}
+              >
+                {link.subLinks.map(subLink => (
+                  <Link
+                    key={subLink.name}
+                    href={subLink.href}
+                    className="block px-4 py-3 text-sm"
+                  >
+                    {subLink.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
       </nav>
       <button
-        className="md:hidden text-current focus:outline-none z-50"
+        className="md:hidden text-current z-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-expanded={isMobileMenuOpen}
         aria-controls="mobile-menu"
       >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            ref={line1Ref}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16"
-          ></path>
-          <path
-            ref={line2Ref}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 12h16"
-          ></path>
-          <path
-            ref={line3Ref}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 18h16"
-          ></path>
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path ref={line1Ref} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16"></path>
+          <path ref={line2Ref} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 12h16"></path>
+          <path ref={line3Ref} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 18h16"></path>
         </svg>
       </button>
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="fixed top-0 right-0 h-screen w-64 bg-black bg-opacity-80 backdrop-blur-sm shadow-lg transform translate-x-full md:hidden z-40"
+        className="fixed top-0 right-0 h-screen w-64 shadow-lg transform translate-x-full md:hidden z-40 overflow-y-auto"
+        style={{ backgroundColor: colors.secondaryBackground, backdropFilter: 'blur(8px)' }}
         aria-hidden={!isMobileMenuOpen}
       >
-        <div className="flex flex-col items-center space-y-8 pt-20">
-          {navLinks.map((link) => renderNavLink(link, true))}
+        <div className="flex flex-col space-y-2 p-4 pt-20">
+          {navLinks.map((link) => (
+            <div key={link.name}>
+              {link.subLinks ? (
+                <button
+                  onClick={() => toggleMobileSubMenu(link.name)}
+                  className="w-full flex justify-between items-center px-4 py-2 text-lg text-left"
+                  style={{ color: colors.mainBackground }}
+                >
+                  {link.name}
+                  <svg
+                    className={`w-4 h-4 ml-2 transition-transform duration-300 ${openMobileSubMenu === link.name ? 'rotate-180' : ''}`}
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+              ) : (
+                <Link
+                  href={link.href || '#'}
+                  className="block px-4 py-2 text-lg"
+                  style={{ color: colors.mainBackground }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              )}
+              {link.subLinks && openMobileSubMenu === link.name && (
+                <div className="pl-4 mt-2 flex flex-col space-y-2">
+                  {link.subLinks.map(subLink => (
+                    <Link
+                      key={subLink.name}
+                      href={subLink.href}
+                      className="block px-4 py-2 text-base"
+                      style={{ color: colors.mainBackground }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {subLink.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </header>
