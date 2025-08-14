@@ -114,6 +114,30 @@ export default function Header() {
     }
   }, [isMobileMenuOpen]);
 
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const bg = e.currentTarget.querySelector('.bg-div');
+    gsap.set(bg, { transformOrigin: 'left' }); // grow from left
+    gsap.to(bg, {
+      scaleX: 1,
+      duration: 0.3,
+      ease: 'power2.out',
+      backgroundColor: colors.thirdBackground,
+    });
+  };
+  
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (clickedLink !== e.currentTarget.id) {
+      const bg = e.currentTarget.querySelector('.bg-div');
+      gsap.set(bg, { transformOrigin: 'right' }); // shrink toward right
+      gsap.to(bg, {
+        scaleX: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        backgroundColor: colors.secondaryBackground,
+      });
+    }
+  };
+
   useGSAP(() => {
     if (headerRef.current) {
       gsap.to(headerRef.current, {
@@ -143,7 +167,24 @@ export default function Header() {
   }, [clickedLink, isScrolled]);
 
   const handleClick = (linkName: string) => {
+    const oldClickedLink = clickedLink;
     setClickedLink(clickedLink === linkName ? null : linkName);
+
+    if (oldClickedLink && oldClickedLink !== linkName) {
+      const oldLink = document.getElementById(oldClickedLink);
+      if (oldLink) {
+        const bg = oldLink.querySelector('.bg-div');
+        gsap.to(bg, { scaleX: 0, duration: 0.3, backgroundColor: colors.secondaryBackground });
+      }
+    }
+
+    if (clickedLink === linkName) {
+      const currentLink = document.getElementById(linkName);
+      if (currentLink) {
+        const bg = currentLink.querySelector('.bg-div');
+        gsap.to(bg, { scaleX: 0, duration: 0.3, backgroundColor: colors.secondaryBackground });
+      }
+    }
   };
 
   const toggleMobileSubMenu = (linkName: string) => {
@@ -157,17 +198,21 @@ export default function Header() {
       style={{ backgroundColor: colors.secondaryBackground, color: colors.thirdBackground, borderBottom: `4px solid ${colors.thirdBackground}` }}
     >
       <Logo />
-      <nav className="hidden md:flex items-center space-x-4">
+      <nav className="hidden md:flex items-center space-x-4 h-full">
         {navLinks.map((link) => (
           <div
             key={link.name}
-            className="relative"
+            id={link.name}
+            className="relative h-full flex items-center px-4 py-2"
             onClick={() => link.subLinks && handleClick(link.name)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
+            <div className="bg-div absolute left-0 top-0 h-full w-full scale-x-0" style={{ backgroundColor: colors.secondaryBackground, zIndex: -1, transformOrigin: 'left' }}></div>
             <Link
               href={link.href || '#'}
-              className="flex items-center px-4 py-2 text-lg"
-              style={{ color: colors.mainBackground }}
+              className={`flex items-center text-lg ${clickedLink === link.name ? 'italic' : ''} hover:italic`}
+              style={{ color: colors.mainBackground, position: 'relative', zIndex: 1 }}
             >
               {link.name}
               {link.subLinks && (
@@ -179,7 +224,7 @@ export default function Header() {
             {link.subLinks && (
               <div
                 ref={(el: HTMLDivElement | null) => { dropdownRefs.current[link.name] = el; }}
-                className={`absolute top-full w-max mt-[16px] p-2 shadow-lg hidden ${link.name === 'ABOUT' ? 'right-0 left-auto' : 'left-0'}`}
+                className={`absolute top-full w-max p-2 shadow-lg hidden ${link.name === 'ABOUT' ? 'right-0 left-auto' : 'left-0'}`}
                 style={{ backgroundColor: colors.thirdBackground, color: colors.secondaryBackground }}
               >
                 {link.subLinks.map(subLink => (

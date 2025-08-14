@@ -64,7 +64,7 @@ const Sponsers = () => {
       aria-label="Our Sponsors"
       style={{ backgroundColor:colors.mainBackground }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.secondaryBackground }}>Parteners</h2>
         
         <div 
@@ -87,7 +87,7 @@ const Sponsers = () => {
             {sponsors.map((sponsor) => (
               <div
                 key={sponsor.id}
-                className="flex-shrink-0 w-32 h-20 bg-white rounded-lg flex items-center justify-center p-4 cursor-pointer transition-transform duration-300 hover:scale-105 focus-within:scale-105"
+                className="flex-shrink-0 w-32 h-20 bg-white flex items-center justify-center p-4 cursor-pointer transition-transform duration-300 hover:scale-105 focus-within:scale-105"
                 tabIndex={0}
                 role="button"
                 aria-label={`${sponsor.name} sponsor logo`}
@@ -112,7 +112,7 @@ const Sponsers = () => {
             {sponsors.map((sponsor) => (
               <div
                 key={`duplicate-${sponsor.id}`}
-                className="flex-shrink-0 w-32 h-20 bg-white rounded-lg flex items-center justify-center p-4 cursor-pointer transition-transform duration-300 hover:scale-105 focus-within:scale-105"
+                className="flex-shrink-0 w-32 h-20 bg-white flex items-center justify-center p-4 cursor-pointer transition-transform duration-300 hover:scale-105 focus-within:scale-105"
                 tabIndex={0}
                 role="button"
                 aria-label={`${sponsor.name} sponsor logo`}
