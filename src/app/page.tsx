@@ -3,8 +3,6 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '@/components/ThemeProvider';
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import ShortSummery from "@/components/ShortSummery";
 import Stories from "@/components/Stories";
@@ -34,7 +32,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <div className="relative">
         <div ref={heroRef}><Hero /></div>
         <div 
@@ -59,7 +56,6 @@ export default function Home() {
           <Sponsers />
         </div>
       </div>
-      <Footer />
     </>
   );
 }

@@ -50,10 +50,10 @@ export default function Footer() {
     {
       name: "ABOUT",
       subLinks: [
-        { name: "BOARD OF DIRECTORS", href: "#" },
-        { name: "CODE OF CONDUCT", href: "#" },
-        { name: "COMMITTEES", href: "#" },
-        { name: "CONTACT US", href: "#" },
+        { name: "BOARD OF DIRECTORS", href: "/about/board-of-directors" },
+        { name: "CODE OF CONDUCT", href: "/about/code-of-conduct" },
+        { name: "COMMITTEES", href: "/about/committees" },
+        { name: "CONTACT US", href: "/about/contact-us" },
       ],
     },
   ];

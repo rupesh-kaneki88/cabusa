@@ -37,7 +37,7 @@ const Stories = () => {
   }, []);
 
   return (
-    <div className="mx-auto px-4 md:px-2 lg:px-20 pt-26 md:pt-58 mb-16 uppercase" style={{ backgroundColor: colors.secondaryBackground }}>
+    <div className="mx-auto px-4 md:px-2 lg:px-20 pt-40 md:pt-58 mb-16 uppercase" style={{ backgroundColor: colors.secondaryBackground }}>
       <h2 className="text-3xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.mainBackground }}>Top Stories</h2>
       <div className="space-y-16">
         {getTopStories().map((story, index) => (
