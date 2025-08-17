@@ -10,10 +10,17 @@ const ContactForm = () => {
     findUs: '',
     enquiry: '',
   });
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  interface FormErrors {
+    name?: string;
+    email?: string;
+    findUs?: string;
+    enquiry?: string;
+  }
 
   const validate = () => {
-    let tempErrors: any = {};
+    const tempErrors: FormErrors = {};
     if (!formData.name) tempErrors.name = 'Name is required';
     if (!formData.email) {
       tempErrors.email = 'Email is required';
