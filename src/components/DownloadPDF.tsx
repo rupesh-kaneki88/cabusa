@@ -39,7 +39,7 @@ const DownloadPDF = () => {
         ref={buttonRef}
         href="/Code-of-Conduct-for-Players-Associations.pdf"
         download
-        className="inline-block px-8 py-4 text-lg font-bold text-white border-2 transition-colors duration-300"
+        className="inline-block px-8 py-4 text-lg font-bold text-white border-2 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         style={{ backgroundColor: colors.secondaryBackground, color: colors.thirdBackground }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}

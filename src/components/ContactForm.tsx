@@ -53,10 +53,12 @@ const ContactForm = () => {
           type="text"
           name="name"
           id="name"
+          required
+          aria-describedby="name-error"
           className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           onChange={handleChange}
         />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+        {errors.name && <p id="name-error" className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div>
         <label htmlFor="email" className="block text-sm font-bold text-gray-700">Email *</label>
@@ -64,16 +66,20 @@ const ContactForm = () => {
           type="email"
           name="email"
           id="email"
+          required
+          aria-describedby="email-error"
           className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           onChange={handleChange}
         />
-        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        {errors.email && <p id="email-error" className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
         <label htmlFor="findUs" className="block text-sm font-bold text-gray-700">How did you find us? *</label>
         <select
           name="findUs"
           id="findUs"
+          required
+          aria-describedby="findUs-error"
           className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           onChange={handleChange}
         >
@@ -83,7 +89,7 @@ const ContactForm = () => {
           <option value="friend">From a friend</option>
           <option value="other">Other</option>
         </select>
-        {errors.findUs && <p className="text-red-500 text-xs mt-1">{errors.findUs}</p>}
+        {errors.findUs && <p id="findUs-error" className="text-red-500 text-xs mt-1">{errors.findUs}</p>}
       </div>
       <div>
         <label htmlFor="enquiry" className="block text-sm font-bold text-gray-700">Enquiry *</label>
@@ -91,10 +97,12 @@ const ContactForm = () => {
           name="enquiry"
           id="enquiry"
           rows={4}
+          required
+          aria-describedby="enquiry-error"
           className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           onChange={handleChange}
         ></textarea>
-        {errors.enquiry && <p className="text-red-500 text-xs mt-1">{errors.enquiry}</p>}
+        {errors.enquiry && <p id="enquiry-error" className="text-red-500 text-xs mt-1">{errors.enquiry}</p>}
       </div>
       <div>
         <button

@@ -37,21 +37,21 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { name: "JOIN", href: "#join-section" },
+    { name: "JOIN", href: "/join" },
     {
       name: "CRICKET",
       href: "#cricket-section",
       subLinks: [
-        { name: "ZONES", href: "#" },
-        { name: "SUBMIT YOUR NEWS", href: "#" },
-        { name: "ABOUT DOMESTIC CRICKET", href: "#" },
+        { name: "TOURNAMENT", href: "/cricket/tournament" },
+        // { name: "MATCH CENTER", href: "#" },
+        // { name: "ABOUT DOMESTIC CRICKET", href: "#" },
       ],
     },
     {
       name: "TEAM",
       // href: "#team-section",
       subLinks: [
-        { name: "PROFILES", href: "#" },
+        { name: "PROFILES", href: "/team/profiles" },
         { name: "ABOUT TEAM USA", href: "#" },
         { name: "MATCH CENTER", href: "#" },
         { name: "SCHEDULE", href: "#" },
@@ -166,6 +166,24 @@ export default function Header() {
     }
   }, [clickedLink, isScrolled]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (clickedLink && dropdownRefs.current[clickedLink] && !dropdownRefs.current[clickedLink]?.contains(event.target as Node)) {
+        const linkElement = document.getElementById(clickedLink);
+        if (linkElement && !linkElement.contains(event.target as Node)) {
+          const bg = linkElement.querySelector('.bg-div');
+          gsap.to(bg, { scaleX: 0, duration: 0.3, backgroundColor: colors.secondaryBackground });
+          setClickedLink(null);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [clickedLink]);
+
   const handleClick = (linkName: string) => {
     const oldClickedLink = clickedLink;
     setClickedLink(clickedLink === linkName ? null : linkName);
@@ -197,7 +215,7 @@ export default function Header() {
       className="fixed w-full z-20 top-0 flex items-center justify-between px-4 md:px-8 lg:px-12"
       style={{ backgroundColor: colors.secondaryBackground, color: colors.thirdBackground, borderBottom: `4px solid ${colors.thirdBackground}` }}
     >
-      <Logo />
+      <Logo color={colors.mainBackground}/>
       <nav className="hidden md:flex items-center space-x-4 h-full">
         {navLinks.map((link) => (
           <div

@@ -4,11 +4,11 @@
 import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
 
-export default function Logo() {
+export default function Logo({ color }: { color: string }) {
   const { colors } = useTheme();
 
   return (
-    <Link href="#" className="flex items-center space-x-2" style={{ color: colors.mainBackground }}>
+    <Link href="/" className="flex items-center space-x-2" style={{ color: color }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

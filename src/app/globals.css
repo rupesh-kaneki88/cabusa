@@ -96,8 +96,13 @@ html, body {
   transform-style: preserve-3d;
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card-inner[aria-pressed="true"] {
   transform: rotateY(180deg);
+}
+
+.flip-card-inner:focus {
+  outline: 2px solid #002d73;
+  outline-offset: 2px;
 }
 
 .flip-card-front,
@@ -107,6 +112,27 @@ html, body {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+.tournament-fixture {
+  position: relative;
+  overflow: hidden;
+}
+
+.tournament-fixture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #002d73;
+  transition: width 0.3s ease-in-out;
+  z-index: -10;
+}
+
+.tournament-fixture:hover::before {
+  width: 100%;
 }
 
 .flip-card-back {

@@ -10,18 +10,23 @@ const ContactUsPage = () => {
   const contactInfoRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.fromTo(contactInfoRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 })
+    if (titleRef.current) {
+      tl.fromTo(titleRef.current, { x: -window.innerWidth }, { x: 0, duration: 1 });
+    }
+
+    tl.fromTo(contactInfoRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }, '-=0.5')
       .fromTo(formRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }, '-=0.5')
       .fromTo(mapRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }, '-=0.5');
   }, []);
 
   return (
     <div className='mb-4 md:mb-8'>
-      <div style={{ backgroundColor: colors.mainBackground }} className="h-24 md:h-40 flex mt-24 md:mt-20 items-center justify-center px-4">
+      <div ref={titleRef} style={{ backgroundColor: colors.mainBackground }} className="h-24 md:h-40 flex mt-24 md:mt-20 items-center justify-center px-4">
         <h1 className="text-2xl md:text-5xl font-bold uppercase italic" style={{ color: colors.secondaryBackground }}>Contact Us</h1>
       </div>
       <div className="container mx-auto  px-4 md:px-14 py-8">

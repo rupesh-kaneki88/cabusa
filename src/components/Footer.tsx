@@ -9,7 +9,7 @@ export default function Footer() {
   const { colors } = useTheme();
 
   const navLinks = [
-    { name: "JOIN", href: "#join-section" },
+    { name: "JOIN", href: "/join" },
     {
       name: "CRICKET",
       href: "#cricket-section",
@@ -61,29 +61,29 @@ export default function Footer() {
   return (
     <footer
       className="w-full py-8 px-4 md:px-8 lg:px-12"
-      style={{ backgroundColor: colors.secondaryBackground, color: colors.thirdBackground }}
+      style={{ backgroundColor: colors.mainBackground, color: colors.secondaryBackground }}
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <Logo />
+            <Logo color={colors.secondaryBackground}/>
           </div>
           <div className="col-span-1 md:col-span-2 lg:col-span-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {navLinks.map((link) => (
               <div key={link.name} className="flex flex-col space-y-2">
-                <h3 className="text-sm md:text-lg font-semibold" style={{ color: colors.mainBackground }}>{link.name}</h3>
+                <h3 className="text-sm md:text-lg font-semibold" >{link.name}</h3>
                 {link.subLinks ? (
                   <ul className="space-y-2 text-sm md:text-lg">
                     {link.subLinks.map((subLink) => (
                       <li key={subLink.name}>
-                        <Link href={subLink.href} className="hover:underline" style={{ color: colors.mainBackground }}>
+                        <Link href={subLink.href} className="hover:underline" >
                           {subLink.name}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <Link href={link.href || '#'} className="hover:underline text-sm md:text-lg" style={{ color: colors.mainBackground }}>
+                  <Link href={link.href || '#'} className="hover:underline text-sm md:text-lg" >
                     {link.name}
                   </Link>
                 )}
@@ -91,7 +91,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-8 border-t pt-6 text-center" style={{ borderColor: colors.thirdBackground, color: colors.mainBackground }}>
+        <div className="mt-8 border-t pt-6 text-center" style={{ borderColor: colors.thirdBackground, color: colors.secondaryBackground }}>
           <p className="text-xs md:text-sm">&copy; 2025 Blind Cricket Association. All rights reserved.</p>
         </div>
       </div>
