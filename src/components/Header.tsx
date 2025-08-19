@@ -52,7 +52,7 @@ export default function Header() {
       // href: "#team-section",
       subLinks: [
         { name: "PROFILES", href: "/team/profiles" },
-        { name: "ABOUT TEAM USA", href: "#" },
+        { name: "ABOUT TEAM USA", href: "/team/about-team-usa" },
         { name: "MATCH CENTER", href: "#" },
         { name: "SCHEDULE", href: "#" },
       ],
