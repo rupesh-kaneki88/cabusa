@@ -4,6 +4,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { User } from 'lucide-react';
+import ImageCarousel from '@/components/ImageCarousel';
 
 const TeamUSAPage = () => {
   const { colors } = useTheme();
@@ -49,6 +50,12 @@ const TeamUSAPage = () => {
     "Mary Smith",
   ];
 
+  const carouselImages = [
+    { src: '/cricket-story1.webp', alt: 'A right handed batsman playing a sweep shot' },
+    { src: '/cricket-story2.webp', alt: 'The team India posing with trophies after the series win.' },
+    { src: '/cricket-story3.webp', alt: 'The whole team along with Dr Mahantesh presenting the world cup to Prime Minister Narendra Modi.' },
+  ];
+
   return (
     <div className='mb-4 md:mb-8'>
       <div ref={titleRef} style={{ backgroundColor: colors.mainBackground }} className="h-24 md:h-40 flex mt-24 md:mt-20 items-center justify-center px-4">
@@ -58,7 +65,7 @@ const TeamUSAPage = () => {
         <div className="text-center mb-8">
           <div className="text-center mb-8">
           <h2 ref={subtitleRef} className="text-lg md:text-xl font-normal px-10 mb-1 md:px-40 lg:px-74 uppercase" style={{color: colors.thirdBackground}}>WE ARE USA BLIND CRICKET</h2>
-          <p ref={quoteRef} className="text-2xl md:text-3xl font-bold mb-8 px-10 md:px-40 lg:px-74">Our mission is to build a world-class blind cricket team that consistently competes at the highest level, while inspiring and uplifting the blind and visually impaired cricket community throughout the United States.</p>
+          <p ref={quoteRef} className="text-2xl md:text-3xl font-bold mb-8 px-10 md:px-40 lg:px-74 uppercase">Our mission is to build a world-class blind cricket team that consistently competes at the highest level, while inspiring and uplifting the blind and visually impaired cricket community throughout the United States.</p>
         </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-400">
@@ -75,7 +82,7 @@ const TeamUSAPage = () => {
           </div>
           <div ref={rightColRef}>
             <div className="mb-8">
-              <h3 className="text-lg md:text-xl font-semibold mb-4" style={{color:colors.mainBackground}}>Men's National Selection Committee</h3>
+              <h3 className="text-lg md:text-xl font-semibold mb-4" style={{color:colors.mainBackground}}>Men&#39;s National Selection Committee</h3>
               <ul>
                 {mensCommittee.map((member) => (
                   <li key={member} className="flex items-center mb-2">
@@ -86,7 +93,7 @@ const TeamUSAPage = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg md:text-xl font-bold mb-4" style={{color:colors.mainBackground}}>Women's National Selection Committee</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-4" style={{color:colors.mainBackground}}>Women&#39;s National Selection Committee</h3>
               <ul>
                 {womensCommittee.map((member) => (
                   <li key={member} className="flex items-center mb-2">
@@ -98,6 +105,29 @@ const TeamUSAPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-4 w-full" style={{ background: 'linear-gradient(to top right, #002d73, #0071ce)', color: colors.secondaryBackground }}>
+        <div className="container mx-auto px-4 md:px-24 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-4" style={{ color: colors.secondaryBackground }}>USA Senior Men</h3>
+                <p className="mb-2"><span className="font-semibold">Current Status:</span> Preparing for upcoming tours.</p>
+                <p className="mb-2"><span className="font-semibold">Captain:</span> Rohan Kanhai</p>
+                <p className="mb-2"><span className="font-semibold">Head Coach:</span> Michael Holding</p>
+                <p><span className="font-semibold">Next Assignment:</span> West Indies tour (2025)</p>
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-4" style={{ color: colors.secondaryBackground }}>USA Senior Women</h3>
+                <p className="mb-2"><span className="font-semibold">Current Status:</span> Training camp in progress.</p>
+                <p className="mb-2"><span className="font-semibold">Captain:</span> Lisa Sthalekar</p>
+                <p className="mb-2"><span className="font-semibold">Head Coach:</span> Charlotte Edwards</p>
+                <p><span className="font-semibold">Next Assignment:</span> England tour (2025)</p>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div className="container mx-auto px-4 md:px-24 py-8">
+        <ImageCarousel images={carouselImages} />
       </div>
     </div>
   );

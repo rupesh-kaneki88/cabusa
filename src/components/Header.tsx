@@ -53,18 +53,17 @@ export default function Header() {
       subLinks: [
         { name: "PROFILES", href: "/team/profiles" },
         { name: "ABOUT TEAM USA", href: "/team/about-team-usa" },
-        { name: "MATCH CENTER", href: "#" },
-        { name: "SCHEDULE", href: "#" },
+        // { name: "MATCH CENTER", href: "#" },
+        // { name: "SCHEDULE", href: "#" },
       ],
     },
     {
       name: "GET INVOLVED",
-      // href: "#get-involved-section",
+      href: "/get-involved",
       subLinks: [
-        { name: "PLAYING", href: "#" },
-        { name: "OFFICIATING", href: "#" },
-        { name: "COACHING", href: "#" },
-        { name: "WOMEN AND GIRLS", href: "#" },
+        { name: "PLAYING", href: "/get-involved#playing" },
+        { name: "OFFICIATING", href: "/get-involved#officiating" },
+        { name: "COACHING", href: "/get-involved#coaching" },
       ],
     },
     {
