@@ -59,7 +59,7 @@ export default function Header() {
     },
     {
       name: "GET INVOLVED",
-      href: "/get-involved",
+      // href: "/get-involved",
       subLinks: [
         { name: "PLAYING", href: "/get-involved#playing" },
         { name: "OFFICIATING", href: "/get-involved#officiating" },
@@ -70,8 +70,8 @@ export default function Header() {
       name: "MORE",
       // href: "#more-section",
       subLinks: [
-        { name: "PHOTOS", href: "#" },
-        { name: "VIDEOS", href: "#" },
+        { name: "PHOTOS", href: "/photos" },
+        { name: "VIDEOS", href: "/videos" },
         { name: "MEDIA RELEASES", href: "#" },
         { name: "NEWS", href: "#" },
         { name: "SOCIAL HUB", href: "#" },

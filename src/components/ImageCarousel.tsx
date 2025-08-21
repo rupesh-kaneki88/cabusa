@@ -188,21 +188,21 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
             >
               <X size={32} className='transition hover:rotate-180'/>
             </button>
-            <button
-              onClick={handleNextInModal}
-              className="absolute top-1/2 right-2 md:right-4 -translate-y-1/2 text-white p-2 rounded-none hover:bg-opacity-75 transition z-10"
-              aria-label="Next image"
-            >
-              <SquareChevronRight size={34} />
-            </button>
-            <button
-              onClick={handlePrevInModal}
-              className="absolute top-1/2 left-2 md:left-4 -translate-y-1/2 text-white p-2 rounded-none hover:bg-opacity-75 transition z-10"
-              aria-label="Previous image"
-            >
-              <SquareChevronLeft size={34} />
-            </button>
           </div>
+          <button
+            onClick={handleNextInModal}
+            className="absolute top-1/2 right-6 transform -translate-y-1/2 text-white p-2 rounded-none hover:bg-opacity-75 transition z-50"
+            aria-label="Next image"
+          >
+            <SquareChevronRight size={34} />
+          </button>
+          <button
+            onClick={handlePrevInModal}
+            className="absolute top-1/2 left-6 transform -translate-y-1/2 text-white p-2 rounded-none hover:bg-opacity-75 transition z-50"
+            aria-label="Previous image"
+          >
+            <SquareChevronLeft size={34} />
+          </button>
         </div>
       )}
     </div>
