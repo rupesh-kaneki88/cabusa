@@ -21,6 +21,7 @@ const PhotoSlugPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const heroImageRef = useRef<HTMLImageElement>(null);
   const openModalButtonRef = useRef<HTMLDivElement | null>(null);
 
   const handleNextInModal = useCallback(() => {
@@ -36,6 +37,24 @@ const PhotoSlugPage = ({ params }: { params: Promise<{ slug: string }> }) => {
       setSelectedImageIndex(newIndex);
     }
   }, [selectedImageIndex, photo]);
+
+  useGSAP(()=>{
+    const heroImage = heroImageRef.current;
+    if(!heroImage)
+      return;
+    gsap.fromTo(
+      heroImage,{
+        scale:1.2,
+        opacity:0.8,
+      },
+      {
+        scale: 1,
+        opacity:1,
+        duration:1,
+        ease:'power3.out'
+      }
+    )
+  }, {})
 
   useGSAP(() => {
     const gridItems = gridRef.current?.children 
@@ -76,7 +95,6 @@ const PhotoSlugPage = ({ params }: { params: Promise<{ slug: string }> }) => {
         y: -3, 
         scale: 1.2,
         backgroundColor: colors.mainBackground,
-        color: colors.secondaryBackground,
         duration: 0.3,
         ease: 'power2.out',
       });
@@ -87,7 +105,6 @@ const PhotoSlugPage = ({ params }: { params: Promise<{ slug: string }> }) => {
         y: 0,
         scale: 1,
         backgroundColor: 'transparent', // or original color
-        color: colors.mainBackground,
         duration: 0.3,
         ease: 'power2.inOut',
       });
@@ -165,15 +182,15 @@ const PhotoSlugPage = ({ params }: { params: Promise<{ slug: string }> }) => {
     }
   
     return (
-    <div>
-      <div style={{ backgroundColor: colors.mainBackground }} className="relative h-[400px] md:h-[600px] mt-4 md:mt-20">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-70 transition-opacity duration-400"/>
-        <Image src={photo.image} alt={photo.description} width={500} height={300} className="w-full h-full object-cover" />
+    <div className="mb-4 md:mb-8">
+      <div style={{ backgroundColor: colors.mainBackground }} className="relative h-[400px] md:h-[560px] mt-4 md:mt-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-70 transition-opacity duration-400 z-10"/>
+        <Image ref={heroImageRef} src={photo.image} alt={photo.description} width={500} height={300} className="w-full h-full object-cover z-0" />
         <div className='absolute inset-0 flex flex-col items-center justify-center z-10'>
           <Link href={'/photos'}>
-            <button ref={buttonRef} className='border border-gray-400 py-2 px-6 mb-2 cursor-pointer'>Photos</button>
+            <button ref={buttonRef} className='border border-gray-400 py-2 px-6 mb-2 cursor-pointer' style={{color: colors.secondaryBackground}}>Photos</button>
           </Link>
-          <h1 className="text-3xl md:text-6xl font-bold uppercase italic" style={{ color: colors.secondaryBackground }}>{photo.title}</h1>
+          <h1 className="text-3xl md:text-6xl font-bold uppercase italic mx-4" style={{ color: colors.secondaryBackground }}>{photo.title}</h1>
 
         </div>
       </div>

@@ -33,18 +33,21 @@ const VideosPage = () => {
       </div>
       <div className="container mx-auto px-4 md:px-24 py-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
         {videos.map((video) => (
-          <Link key={video.id} href={`/videos/${video.slug}`}>
-            <div
-              className="relative shadow-md overflow-hidden h-84"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Image src={video.thumbnail} alt={video.title} layout="fill" className="w-full h-full object-cover opacity-70" />
-              <div className="absolute top-2 right-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm">{video.category}</div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-75 p-4">
-                <h2 className="text-lg font-bold text-white">{video.title}</h2>
-                <p className="text-sm text-gray-300">{video.date}</p>
-              </div>
+          <Link 
+            key={video.id} 
+            href={`/videos/${video.slug}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onFocus={handleMouseEnter}
+            onBlur={handleMouseLeave}
+            tabIndex={0}
+            className="relative shadow-md overflow-hidden h-84"
+          >
+            <Image src={video.thumbnail} alt={video.title} layout="fill" className="w-full h-full object-cover opacity-70" />
+            <div className="absolute top-2 right-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm">{video.category}</div>
+            <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-75 p-4">
+              <h2 className="text-lg font-bold text-white">{video.title}</h2>
+              <p className="text-sm text-gray-300">{video.date}</p>
             </div>
           </Link>
         ))}

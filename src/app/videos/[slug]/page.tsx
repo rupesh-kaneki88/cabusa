@@ -4,13 +4,105 @@ import { videos } from '@/data/videos';
 import { useTheme } from '@/components/ThemeProvider';
 import { useRef, useEffect, use } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 
-const VideoDetailPage = ({ params }: { params: { slug: string } }) => {
+gsap.registerPlugin(ScrollTrigger);
+
+const VideoDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
   const { colors } = useTheme();
   const video = videos.find((p) => p.slug === slug);
   const titleRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<(HTMLDivElement | null)[]>([]);
+  const heroImageRef = useRef<HTMLImageElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(()=>{
+    const heroImage = heroImageRef.current;
+    if(!heroImage)
+      return;
+    gsap.fromTo(
+      heroImage,{
+        scale:1.2,
+        opacity:0.8,
+      },
+      {
+        scale: 1,
+        opacity:1,
+        duration:1,
+        ease:'power3.out'
+      }
+    )
+  }, {})
+
+  useGSAP(() => {
+    const buttonEl = buttonRef.current;
+    if (!buttonEl) return;
+  
+    const hoverIn = () => {
+      gsap.to(buttonEl, {
+        y: -3, 
+        scale: 1.2,
+        backgroundColor: colors.mainBackground,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    };
+  
+    const hoverOut = () => {
+      gsap.to(buttonEl, {
+        y: 0,
+        scale: 1,
+        backgroundColor: 'transparent', // or original color
+        duration: 0.3,
+        ease: 'power2.inOut',
+      });
+    };
+  
+    buttonEl.addEventListener('mouseenter', hoverIn);
+    buttonEl.addEventListener('mouseleave', hoverOut);
+  
+
+    return () => {
+      buttonEl.removeEventListener('mouseenter', hoverIn);
+      buttonEl.removeEventListener('mouseleave', hoverOut);
+    };
+  }, { dependencies: [colors.mainBackground] });
+
+  useGSAP(() => {
+    const gridItems = gridRef.current?.children 
+      ? Array.from(gridRef.current.children) 
+      : [];
+  
+    if (gridItems.length) {
+      gsap.fromTo(
+        gridItems,
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.8,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.7,
+          ease: "power.out3",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
+  }, { scope: gridRef });
+
 
   useEffect(() => {
     if (titleRef.current) {
@@ -40,14 +132,21 @@ const VideoDetailPage = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="mb-4 md:mb-8">
-      <div ref={titleRef} style={{ backgroundColor: colors.mainBackground }} className="h-24 md:h-40 flex mt-24 md:mt-20 items-center justify-center px-4">
-        <h1 className="text-2xl md:text-5xl font-bold uppercase italic" style={{ color: colors.secondaryBackground }}>{video.title}</h1>
+      <div style={{ backgroundColor: colors.mainBackground }} className="relative h-[400px] md:h-[560px] mt-4 md:mt-20 overflow-hidden mb-4 md:mb-8">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-70 transition-opacity duration-400 z-10"/>
+        <Image ref={heroImageRef} src={video.thumbnail} alt={video.description} width={500} height={300} className="w-full h-full object-cover z-0" />
+        <div className='absolute inset-0 flex flex-col items-center justify-center z-10 mt-14 md:mt-4'>
+          <Link href={'/videos'}>
+            <button ref={buttonRef} className='border border-gray-400 py-2 px-6 mb-2 cursor-pointer' style={{color: colors.secondaryBackground}}>Videos</button>
+          </Link>
+          <h1 className="text-3xl md:text-6xl font-bold uppercase italic mx-4" style={{ color: colors.secondaryBackground }}>{video.title}</h1>
+
+        </div>
       </div>
       <div className="container mx-auto px-4 md:px-24 py-8">
-        <p className="text-lg text-center mb-8">{video.description}</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {video.videos.map((videoData, index) => (
-            <div key={index} ref={el => videoRef.current[index] = el} className="shadow-lg rounded-lg overflow-hidden">
+            <div key={index} ref={el => {videoRef.current[index] = el;}} className="shadow-lg overflow-hidden">
               <iframe
                 width="100%"
                 height="315"
@@ -60,7 +159,6 @@ const VideoDetailPage = ({ params }: { params: { slug: string } }) => {
               ></iframe>
               <div className="p-4">
                 <h3 className="text-xl font-bold mb-2">{videoData.title}</h3>
-                <p className="text-gray-700">{videoData.description}</p>
               </div>
             </div>
           ))}
