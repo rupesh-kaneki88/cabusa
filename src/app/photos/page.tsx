@@ -17,11 +17,19 @@ const PhotosPage = () => {
     }
   }, []);
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     gsap.to(e.currentTarget.querySelector('img'), { scale: 1.1, duration: 0.3, opacity:1 });
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    gsap.to(e.currentTarget.querySelector('img'), { scale: 1, duration: 0.3, opacity:0.7 });
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLAnchorElement>) => {
+    gsap.to(e.currentTarget.querySelector('img'), { scale: 1.1, duration: 0.3, opacity:1 });
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLAnchorElement>) => {
     gsap.to(e.currentTarget.querySelector('img'), { scale: 1, duration: 0.3, opacity:0.7 });
   };
 
@@ -37,8 +45,8 @@ const PhotosPage = () => {
             href={`/photos/${photo.slug}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onFocus={handleMouseEnter}
-            onBlur={handleMouseLeave}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             tabIndex={0}
             className="relative shadow-md overflow-hidden h-84"
           >

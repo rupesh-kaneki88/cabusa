@@ -14,34 +14,36 @@ export default function Footer() {
       name: "CRICKET",
       href: "#cricket-section",
       subLinks: [
-        { name: "ZONES", href: "#" },
-        { name: "SUBMIT YOUR NEWS", href: "#" },
-        { name: "ABOUT DOMESTIC CRICKET", href: "#" },
+        { name: "TOURNAMENT", href: "/cricket/tournament" },
+        // { name: "MATCH CENTER", href: "#" },
+        // { name: "ABOUT DOMESTIC CRICKET", href: "#" },
       ],
     },
     {
       name: "TEAM",
+      // href: "#team-section",
       subLinks: [
-        { name: "PROFILES", href: "#" },
-        { name: "ABOUT TEAM USA", href: "#" },
-        { name: "MATCH CENTER", href: "#" },
-        { name: "SCHEDULE", href: "#" },
+        { name: "PROFILES", href: "/team/profiles" },
+        { name: "ABOUT TEAM USA", href: "/team/about-team-usa" },
+        // { name: "MATCH CENTER", href: "#" },
+        // { name: "SCHEDULE", href: "#" },
       ],
     },
     {
       name: "GET INVOLVED",
+      // href: "/get-involved",
       subLinks: [
-        { name: "PLAYING", href: "#" },
-        { name: "OFFICIATING", href: "#" },
-        { name: "COACHING", href: "#" },
-        { name: "WOMEN AND GIRLS", href: "#" },
+        { name: "PLAYING", href: "/get-involved#playing" },
+        { name: "OFFICIATING", href: "/get-involved#officiating" },
+        { name: "COACHING", href: "/get-involved#coaching" },
       ],
     },
     {
       name: "MORE",
+      // href: "#more-section",
       subLinks: [
-        { name: "PHOTOS", href: "#" },
-        { name: "VIDEOS", href: "#" },
+        { name: "PHOTOS", href: "/photos" },
+        { name: "VIDEOS", href: "/videos" },
         { name: "MEDIA RELEASES", href: "#" },
         { name: "NEWS", href: "#" },
         { name: "SOCIAL HUB", href: "#" },
@@ -49,11 +51,12 @@ export default function Footer() {
     },
     {
       name: "ABOUT",
+      // href: "#about-section",
       subLinks: [
         { name: "BOARD OF DIRECTORS", href: "/about/board-of-directors" },
         { name: "CODE OF CONDUCT", href: "/about/code-of-conduct" },
         { name: "COMMITTEES", href: "/about/committees" },
-        { name: "CONTACT US", href: "/about/contact-us" },
+        { name: "CONTACT US", href: "/about/contact-us" }
       ],
     },
   ];
