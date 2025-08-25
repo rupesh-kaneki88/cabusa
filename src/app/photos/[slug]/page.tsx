@@ -188,7 +188,7 @@ const PhotoSlugPage = ({ params }: { params: Promise<{ slug: string }> }) => {
         <Image ref={heroImageRef} src={photo.image} alt={photo.description} width={500} height={300} className="w-full h-full object-cover z-0" />
         <div className='absolute inset-0 flex flex-col items-center justify-center z-10'>
           <Link href={'/photos'}>
-            <button ref={buttonRef} className='border border-gray-400 py-2 px-6 mb-2 cursor-pointer' style={{color: colors.secondaryBackground}}>Photos</button>
+            <button ref={buttonRef} className='border border-gray-400 py-1 px-4 mb-2 cursor-pointer' style={{color: colors.secondaryBackground}}>Photos</button>
           </Link>
           <h1 className="text-3xl md:text-6xl font-bold uppercase italic mx-4" style={{ color: colors.secondaryBackground }}>{photo.title}</h1>
 

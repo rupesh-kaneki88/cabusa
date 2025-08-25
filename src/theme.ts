@@ -15,7 +15,8 @@ export const theme = {
     // text: '#E0E1DD',
     accent: '#FFD700',
     secondaryText: '#04C0E0',
-    complimentryText: '#E02504'
+    complimentryText: '#E02504',
+    border: '#E0DBD8'
   },
   fonts: {
     inter: 'var(--font-inter)',

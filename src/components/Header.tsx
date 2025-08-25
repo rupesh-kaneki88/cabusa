@@ -72,9 +72,8 @@ export default function Header() {
       subLinks: [
         { name: "PHOTOS", href: "/photos" },
         { name: "VIDEOS", href: "/videos" },
-        { name: "MEDIA RELEASES", href: "#" },
-        { name: "NEWS", href: "#" },
-        { name: "SOCIAL HUB", href: "#" },
+        { name: "MEDIA RELEASES", href: "/media-release" },
+        // { name: "SOCIAL HUB", href: "#" },
       ],
     },
     {
@@ -93,8 +92,8 @@ export default function Header() {
     if (mobileMenuRef.current) {
       gsap.to(mobileMenuRef.current, { 
         x: isMobileMenuOpen ? 0 : "100%", 
-        duration: 0.3, 
-        ease: "power2.out" 
+        duration: 0.6, 
+        ease: "power3.out" 
       });
     }
   }, [isMobileMenuOpen]);
@@ -191,7 +190,7 @@ export default function Header() {
       const oldLink = document.getElementById(oldClickedLink);
       if (oldLink) {
         const bg = oldLink.querySelector('.bg-div');
-        gsap.to(bg, { scaleX: 0, duration: 0.3, backgroundColor: colors.secondaryBackground });
+        gsap.to(bg, { scaleX: 0, duration: 0.6, backgroundColor: colors.secondaryBackground });
       }
     }
 
@@ -203,6 +202,21 @@ export default function Header() {
       }
     }
   };
+
+  const mobileSubMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useGSAP(() => {
+    Object.keys(mobileSubMenuRefs.current).forEach(key => {
+      const subMenu = mobileSubMenuRefs.current[key];
+      if (subMenu) {
+        if (openMobileSubMenu === key) {
+          gsap.to(subMenu, { height: 'auto', opacity: 1, duration: 0.6, ease: 'power2.out' });
+        } else {
+          gsap.to(subMenu, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+        }
+      }
+    });
+  }, [openMobileSubMenu]);
 
   const toggleMobileSubMenu = (linkName: string) => {
     setOpenMobileSubMenu(openMobileSubMenu === linkName ? null : linkName);
@@ -220,27 +234,36 @@ export default function Header() {
           <div
             key={link.name}
             id={link.name}
-            className="relative h-full flex items-center px-4 py-2"
+            className="relative h-full flex items-center"
             onClick={() => link.subLinks && handleClick(link.name)}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="bg-div absolute left-0 top-0 h-full w-full scale-x-0" style={{ backgroundColor: colors.secondaryBackground, zIndex: -1, transformOrigin: 'left' }}></div>
             <Link
               href={link.href || '#'}
-              className={`flex items-center text-lg ${clickedLink === link.name ? 'italic' : ''} hover:italic`}
-              style={{ color: colors.mainBackground, position: 'relative', zIndex: 1 }}
+              className={`relative flex items-center text-lg px-4 py-2`}
+              style={{ color: colors.mainBackground, zIndex: 1 }}
             >
+              {/* Move bg-div here */}
+              <span
+                className="bg-div absolute inset-0 w-full h-full scale-x-0 z-[-1]"
+                style={{ backgroundColor: colors.secondaryBackground, transformOrigin: 'left' }}
+              />
               {link.name}
               {link.subLinks && (
-                <svg className={`w-4 h-4 ml-2 transition-transform duration-300 ${clickedLink === link.name ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                <svg
+                  className={`w-4 h-4 ml-2 transition-transform duration-300 ${clickedLink === link.name ? 'rotate-180' : ''}`}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               )}
             </Link>
+          
             {link.subLinks && (
               <div
-                ref={(el: HTMLDivElement | null) => { dropdownRefs.current[link.name] = el; }}
+                ref={(el) => { dropdownRefs.current[link.name] = el; }}
                 className={`absolute top-full w-max p-2 shadow-lg hidden ${link.name === 'ABOUT' ? 'right-0 left-auto' : 'left-0'}`}
                 style={{ backgroundColor: colors.thirdBackground, color: colors.secondaryBackground }}
               >
@@ -256,6 +279,7 @@ export default function Header() {
               </div>
             )}
           </div>
+        
         ))}
       </nav>
       <button
@@ -283,12 +307,12 @@ export default function Header() {
               {link.subLinks ? (
                 <button
                   onClick={() => toggleMobileSubMenu(link.name)}
-                  className="w-full flex justify-between items-center px-4 py-2 text-lg text-left"
+                  className="w-full flex justify-between items-center px-4 py-2 text-lg text-left bg-gray-400"
                   style={{ color: colors.mainBackground }}
                 >
                   {link.name}
                   <svg
-                    className={`w-4 h-4 ml-2 transition-transform duration-300 ${openMobileSubMenu === link.name ? 'rotate-180' : ''}`}
+                    className={`w-4 h-4 ml-2 transition-transform duration-400 ${openMobileSubMenu === link.name ? 'rotate-180' : ''}`}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
@@ -297,20 +321,23 @@ export default function Header() {
               ) : (
                 <Link
                   href={link.href || '#'}
-                  className="block px-4 py-2 text-lg"
+                  className="block px-4 py-2 text-lg bg-gray-400"
                   style={{ color: colors.mainBackground }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               )}
-              {link.subLinks && openMobileSubMenu === link.name && (
-                <div className="pl-4 mt-2 flex flex-col space-y-2">
+              {link.subLinks && (
+                <div 
+                  ref={(el) => { mobileSubMenuRefs.current[link.name] = el; }}
+                  className="pl-4 mt-2 flex-col space-y-2 overflow-hidden h-0 opacity-0 bg-gray-300"
+                >
                   {link.subLinks.map(subLink => (
                     <Link
                       key={subLink.name}
                       href={subLink.href}
-                      className="block px-4 py-2 text-base"
+                      className="block px-4 py-2 text-base opacity-70"
                       style={{ color: colors.mainBackground }}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >

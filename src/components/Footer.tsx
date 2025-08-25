@@ -44,9 +44,8 @@ export default function Footer() {
       subLinks: [
         { name: "PHOTOS", href: "/photos" },
         { name: "VIDEOS", href: "/videos" },
-        { name: "MEDIA RELEASES", href: "#" },
-        { name: "NEWS", href: "#" },
-        { name: "SOCIAL HUB", href: "#" },
+        { name: "MEDIA RELEASES", href: "/media-release" },
+        // { name: "SOCIAL HUB", href: "#" },
       ],
     },
     {
