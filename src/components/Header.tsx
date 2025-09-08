@@ -80,6 +80,7 @@ export default function Header() {
       name: "ABOUT",
       // href: "#about-section",
       subLinks: [
+        { name: "ABOUT US", href: "/about" },
         { name: "BOARD OF DIRECTORS", href: "/about/board-of-directors" },
         { name: "CODE OF CONDUCT", href: "/about/code-of-conduct" },
         { name: "COMMITTEES", href: "/about/committees" },
