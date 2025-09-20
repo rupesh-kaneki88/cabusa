@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { GSAPProvider } from "@/components/GSAPProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LayoutClient from "@/components/LayoutClient";
 
 export const metadata: Metadata = {
   title: "Blind Cricket Association",
@@ -21,7 +22,7 @@ export default function RootLayout({
         <ThemeProvider>
           <GSAPProvider>
             <Header />
-            {children}
+            <LayoutClient>{children}</LayoutClient>
             <Footer />
           </GSAPProvider>
         </ThemeProvider>

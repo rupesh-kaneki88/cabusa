@@ -26,14 +26,14 @@ const DonatePage = () => {
     const sections = contentRef.current?.querySelectorAll('.donation-section');
     if (sections) {
       sections.forEach(section => {
-        gsap.fromTo(section, 
+        gsap.fromTo(section as HTMLElement, 
           { opacity: 0, y: 50 }, 
           { 
             opacity: 1, y: 0, duration: 1, ease: 'power3.out', 
             scrollTrigger: {
-              trigger: section as any,
+              trigger: section as HTMLElement,
               start: 'top 80%',
-              toggleActions: 'play none none reverse'
+              toggleActions: 'play none none none'
             }
           }
         );
@@ -42,10 +42,10 @@ const DonatePage = () => {
 
     if (whyDonateRef.current) {
       const cards = whyDonateRef.current.querySelectorAll('.why-donate-card');
-      gsap.fromTo(cards[0], { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[0] as any, start: 'top 80%' } });
-      gsap.fromTo(cards[1], { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[1] as any, start: 'top 80%' } });
-      gsap.fromTo(cards[2], { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[2] as any, start: 'top 80%' } });
-      gsap.fromTo(cards[3], { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[3] as any, start: 'top 80%' } });
+      gsap.fromTo(cards[0] as HTMLElement, { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[0] as HTMLElement, start: 'top 80%' } });
+      gsap.fromTo(cards[1] as HTMLElement, { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[1] as HTMLElement, start: 'top 80%' } });
+      gsap.fromTo(cards[2] as HTMLElement, { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[2] as HTMLElement, start: 'top 80%' } });
+      gsap.fromTo(cards[3] as HTMLElement, { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: cards[3] as HTMLElement, start: 'top 80%' } });
     }
   }, []);
 
@@ -113,35 +113,32 @@ const DonatePage = () => {
   };
 
   return (
-    <div className='mb-4 md:mb-8'>
+    <main className='mb-4 md:mb-8'>
       <div ref={titleRef} style={{ backgroundColor: colors.mainBackground }} className="h-24 md:h-40 flex mt-24 md:mt-20 items-center justify-center px-4">
         <h1 className="text-2xl md:text-5xl font-bold uppercase italic" style={{ color: colors.secondaryBackground }}>Donate</h1>
       </div>
       <div ref={contentRef} className="container py-8 mb-8 px-4 md:px-24 space-y-2 md:space-y-4">
-        <div className="donation-section mb-12 text-center">
-          <h2 className="text-3xl font-bold mb-4 uppercase" style={{ color: colors.thirdBackground }}>Our Impact</h2>
+        <section aria-labelledby="our-impact-heading" className="donation-section mb-12 text-center">
+          <h2 id="our-impact-heading" className="text-3xl font-bold mb-4 uppercase" style={{ color: colors.thirdBackground }}>Our Impact</h2>
           <p className="text-lg md:text-xl text-gray-500">Every contribution has the power to transform lives. Whether by covering travel expenses for a young athlete, providing essential equipment, or supporting a training session, your generosity helps create meaningful opportunities for individuals with visual impairments to thrive.</p>
-        </div>
+        </section>
 
-        <div className="donation-section mb-12 p-8 border rounded-lg shadow-lg" style={{ background: `linear-gradient(to right,rgb(0, 0, 0),rgb(99, 99, 99))` }}>
-          <h2 className="text-3xl font-bold text-center mb-8 uppercase" style={{ color: colors.thirdBackground }}>Ways to Give</h2>
-          <div className="flex justify-center mb-8">
-            <button 
-              className={`px-4 py-2 font-bold ${selectedOption === 'paypal' ? 'border-b-2' : ''}`}
+        <section aria-labelledby="ways-to-give-heading" className="donation-section mb-12 p-8 border rounded-lg shadow-lg" style={{ background: `linear-gradient(to right,rgb(0, 0, 0),rgb(99, 99, 99))` }}>
+          <h2 id="ways-to-give-heading" className="text-3xl font-bold text-center mb-8 uppercase" style={{ color: colors.thirdBackground }}>Ways to Give</h2>
+          <div role="tablist" className="flex justify-center mb-8">
+            <button role="tab" aria-selected={selectedOption === 'paypal'} aria-controls="paypal-panel" id="paypal-tab" className={`px-4 py-2 font-bold ${selectedOption === 'paypal' ? 'border-b-2' : ''}`}
               style={{ borderColor: selectedOption === 'paypal' ? colors.thirdBackground : 'transparent', color:colors.secondaryBackground }}
               onClick={() => setSelectedOption('paypal')}
             >
               PayPal
             </button>
-            <button 
-              className={`px-4 py-2 font-bold ${selectedOption === 'bank' ? 'border-b-2' : ''}`}
+            <button role="tab" aria-selected={selectedOption === 'bank'} aria-controls="bank-panel" id="bank-tab" className={`px-4 py-2 font-bold ${selectedOption === 'bank' ? 'border-b-2' : ''}`}
               style={{ borderColor: selectedOption === 'bank' ? colors.thirdBackground : 'transparent', color:colors.secondaryBackground }}
               onClick={() => setSelectedOption('bank')}
             >
               Bank Transfer
             </button>
-            <button 
-              className={`px-4 py-2 font-bold ${selectedOption === 'zelle' ? 'border-b-2' : ''}`}
+            <button role="tab" aria-selected={selectedOption === 'zelle'} aria-controls="zelle-panel" id="zelle-tab" className={`px-4 py-2 font-bold ${selectedOption === 'zelle' ? 'border-b-2' : ''}`}
               style={{ borderColor: selectedOption === 'zelle' ? colors.thirdBackground : 'transparent', color:colors.secondaryBackground }}
               onClick={() => setSelectedOption('zelle')}
             >
@@ -149,14 +146,16 @@ const DonatePage = () => {
             </button>
           </div>
           <div ref={donationOptionsRef}>
-            {renderDonationOption()}
+            <div id="paypal-panel" role="tabpanel" tabIndex={0} aria-labelledby="paypal-tab" hidden={selectedOption !== 'paypal'}>{renderDonationOption()}</div>
+            <div id="bank-panel" role="tabpanel" tabIndex={0} aria-labelledby="bank-tab" hidden={selectedOption !== 'bank'}>{renderDonationOption()}</div>
+            <div id="zelle-panel" role="tabpanel" tabIndex={0} aria-labelledby="zelle-tab" hidden={selectedOption !== 'zelle'}>{renderDonationOption()}</div>
           </div>
-        </div>
+        </section>
 
-        <div ref={whyDonateRef} className="donation-section mb-12">
-          <h2 className="text-3xl font-bold text-center mb-4 uppercase" style={{ color: colors.thirdBackground }}>Why Donate?</h2>
+        <section aria-labelledby="why-donate-heading" ref={whyDonateRef} className="donation-section mb-12">
+          <h2 id="why-donate-heading" className="text-3xl font-bold text-center mb-4 uppercase" style={{ color: colors.thirdBackground }}>Why Donate?</h2>
           <p className="text-lg md:text-xl text-center text-gray-500">Your donation can help us in:</p>
-        </div>
+        </section>
 
         <div className="donation-section grid md:grid-cols-2 gap-8 mb-12">
           <div className="p-6 shadow-lg rounded-lg why-donate-card">
@@ -177,12 +176,12 @@ const DonatePage = () => {
           </div>
         </div>
 
-        <div className="donation-section text-center">
-          <h2 className="text-3xl font-bold mb-4 uppercase" style={{ color: colors.thirdBackground }}>Join the Movement</h2>
+        <section aria-labelledby="join-movement-heading" className="donation-section text-center">
+          <h2 id="join-movement-heading" className="text-3xl font-bold mb-4 uppercase" style={{ color: colors.thirdBackground }}>Join the Movement</h2>
           <p className="text-lg md:text-xl mb-8 text-gray-500">Donate to support blind cricket in the USA and be part of this game-changing journey. Donate now and make a difference!</p>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
