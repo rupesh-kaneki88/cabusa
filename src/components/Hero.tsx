@@ -164,7 +164,7 @@ export default function Hero() {
                 </p>
                 <div className="flex flex-col gap-3 min-[400px]:flex-row mt-14 lg:mt-8">
                   <Link
-                    href="#"
+                    href="/about"
                     className="relative inline-flex h-10 items-center justify-center px-8 text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                     style={{ color: colors.thirdBackground }}
                     onMouseEnter={handleLearnMoreMouseEnter}
@@ -175,7 +175,7 @@ export default function Hero() {
                   </Link>
                   <Link
                     ref={buttonRef}
-                    href="#"
+                    href="/videos"
                     className="inline-flex h-10 items-center justify-center border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-text-light/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
                     style={{ borderColor: colors.text, color: colors.text }}
                     onMouseMove={handleMouseMove}

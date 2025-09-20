@@ -283,6 +283,25 @@ export default function Header() {
         
         ))}
       </nav>
+      <div className="hidden md:flex items-center">
+        <div
+          className="relative h-full flex items-center"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link
+            href="/donate"
+            className={`relative flex items-center text-lg px-4 py-2`}
+            style={{ color: colors.mainBackground, zIndex: 1 }}
+          >
+            <span
+              className="bg-div absolute inset-0 w-full h-full scale-x-0 z-[-1]"
+              style={{ backgroundColor: colors.secondaryBackground, transformOrigin: 'left' }}
+            />
+            Donate
+          </Link>
+        </div>
+      </div>
       <button
         className="md:hidden text-current z-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -349,6 +368,14 @@ export default function Header() {
               )}
             </div>
           ))}
+          <Link
+            href="/donate"
+            className="block px-4 py-2 text-lg bg-gray-400"
+            style={{ color: colors.mainBackground }}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Donate
+          </Link>
         </div>
       </div>
     </header>
