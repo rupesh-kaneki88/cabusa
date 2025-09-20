@@ -8,35 +8,37 @@ import { useRef, useEffect } from 'react';
 
 export default function Loader() {
   const { colors } = useTheme();
-  const container = useRef(null);
+  const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const texts = container.current.querySelectorAll('.loading-text');
-    texts.forEach(text => {
-      const direction = text.dataset.direction;
-      let x = 0, y = 0;
-      switch (direction) {
-        case 'left-to-right':
-          x = window.innerWidth + 200;
-          break;
-        case 'right-to-left':
-          x = -window.innerWidth - 200;
-          break;
-        case 'bottom-to-top':
-          y = -window.innerHeight - 200;
-          break;
-        case 'top-to-bottom':
-          y = window.innerHeight + 200;
-          break;
-      }
-      gsap.to(text, {
-        x: x,
-        y: y,
-        duration: 20 + Math.random() * 10,
-        repeat: -1,
-        ease: 'linear'
+    if (container.current) {
+      const texts = container.current.querySelectorAll('.loading-text');
+      texts.forEach(text => {
+        const direction = (text as HTMLElement).dataset.direction;
+        let x = 0, y = 0;
+        switch (direction) {
+          case 'left-to-right':
+            x = window.innerWidth + 200;
+            break;
+          case 'right-to-left':
+            x = -window.innerWidth - 200;
+            break;
+          case 'bottom-to-top':
+            y = -window.innerHeight - 200;
+            break;
+          case 'top-to-bottom':
+            y = window.innerHeight + 200;
+            break;
+        }
+        gsap.to(text, {
+          x: x,
+          y: y,
+          duration: 20 + Math.random() * 10,
+          repeat: -1,
+          ease: 'linear'
+        });
       });
-    });
+    }
   }, { scope: container });
 
   const createTexts = (direction: string, count: number) => {
